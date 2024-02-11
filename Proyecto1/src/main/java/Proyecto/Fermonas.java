@@ -14,14 +14,31 @@ public class Fermonas {
         this.factorvaporacion = (float) 0.5;
         this.aprendizaje = 1;
     }
+
+    public int getImporfermonas() {
+        return imporfermonas;
+    }
+
+    public void setImporfermonas(int imporfermonas) {
+        this.imporfermonas = imporfermonas;
+    }
+
+    public float getFactorvaporacion() {
+        return factorvaporacion;
+    }
+
+    public void setFactorvaporacion(float factorvaporacion) {
+        this.factorvaporacion = factorvaporacion;
+    }
+
+    public int getAprendizaje() {
+        return aprendizaje;
+    }
+
+    public void setAprendizaje(int aprendizaje) {
+        this.aprendizaje = aprendizaje;
+    }
  
- 
- public int calculofermonas(Ciudad ciudad){
-   return 0;  
- }
- 
- public int evaporacion(){
-  return 0;   
- } 
+
  
 }

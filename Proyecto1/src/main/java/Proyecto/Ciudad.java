@@ -15,5 +15,28 @@ private int ciudadmax;
         this.ciudadmax = 0;
     }
 
+    public int getVisibilidad() {
+        return visibilidad;
+    }
+
+    public void setVisibilidad(int visibilidad) {
+        this.visibilidad = visibilidad;
+    }
+
+    public int getUnidos() {
+        return unidos;
+    }
+
+    public void setUnidos(int unidos) {
+        this.unidos = unidos;
+    }
+
+    public int getCiudadmax() {
+        return ciudadmax;
+    }
+
+    public void setCiudadmax(int ciudadmax) {
+        this.ciudadmax = ciudadmax;
+    }
 
 }

@@ -1,8 +1,8 @@
 
-package Proyecto;
+package PruebaGrafo;
 
 public class Matriz {
-  private int maximo;
+ private int maximo;
  private int matrix[][];
 
 
@@ -53,7 +53,7 @@ public class Matriz {
  } 
  }
 
- public int[][] añadir(PruebaGrafo.Matriz matriz){
+ public int[][] añadir(Matriz matriz){
    int copia[][] = new int [matriz.getMaximo()+1][matriz.getMaximo()+1];
      for (int i = 0; i < matriz.getMaximo() ; i++) {   
      for (int j = 0; j < matriz.getMaximo(); j++) {
@@ -74,5 +74,6 @@ public void eliminar(int numero){
       borrar[numero][i] = -1;
       borrar[i][numero]= -1;
     }
-}    
+} 
+ 
 }
