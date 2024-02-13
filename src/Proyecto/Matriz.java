@@ -2,8 +2,8 @@
 package Proyecto;
 
 public class Matriz {
-  private int maximo;
- private int matrix[][];
+private int maximo;
+private int matrix[][];
 
 
     public Matriz() {
