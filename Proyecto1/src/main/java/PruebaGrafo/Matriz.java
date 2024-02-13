@@ -2,13 +2,15 @@
 package PruebaGrafo;
 
 public class Matriz {
- private int maximo;
+  private int maximo;
  private int matrix[][];
+ private int buscados[];
 
 
     public Matriz() {
         this.maximo = 5;
         this.matrix = null;
+        this.buscados = null;
     }
 
     public int getMaximo() {
@@ -26,6 +28,15 @@ public class Matriz {
     public void setMatrix(int[][] matrix) {
         this.matrix = matrix;
     }
+
+    public int[] getBuscados() {
+        return buscados;
+    }
+
+    public void setBuscados(int[] buscados) {
+        this.buscados = buscados;
+    }
+    
     
   public int[][] crearmatrix(){
    setMatrix(new int [getMaximo()][getMaximo()]);
@@ -53,7 +64,7 @@ public class Matriz {
  } 
  }
 
- public int[][] añadir(Matriz matriz){
+ public int[][] añadir(PruebaGrafo.Matriz matriz){
    int copia[][] = new int [matriz.getMaximo()+1][matriz.getMaximo()+1];
      for (int i = 0; i < matriz.getMaximo() ; i++) {   
      for (int j = 0; j < matriz.getMaximo(); j++) {
@@ -74,6 +85,14 @@ public void eliminar(int numero){
       borrar[numero][i] = -1;
       borrar[i][numero]= -1;
     }
-} 
- 
+}
+
+public int[] buscar(int columnas){
+    setBuscados(new int[getMaximo()]);
+    for (int i = 0; i < getMaximo(); i++) {
+      getBuscados()[i] = getMatrix()[columnas][i];  
+    }
+    return getBuscados();
+}
+
 }

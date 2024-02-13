@@ -4,11 +4,12 @@ package Proyecto;
 public class Matriz {
   private int maximo;
  private int matrix[][];
-
+ private int buscados[];
 
     public Matriz() {
         this.maximo = 5;
         this.matrix = null;
+        this.buscados = null;
     }
 
     public int getMaximo() {
@@ -26,6 +27,15 @@ public class Matriz {
     public void setMatrix(int[][] matrix) {
         this.matrix = matrix;
     }
+
+    public int[] getBuscados() {
+        return buscados;
+    }
+
+    public void setBuscados(int[] buscados) {
+        this.buscados = buscados;
+    }
+    
     
   public int[][] crearmatrix(){
    setMatrix(new int [getMaximo()][getMaximo()]);
@@ -64,7 +74,9 @@ public class Matriz {
         copia[matriz.getMaximo()][i] =0;
         copia[i][matriz.getMaximo()] = 0;
      }
-     
+     if (getMaximo() > 20){
+     return getMatrix();    
+     }
      return copia;
  }
  
@@ -74,5 +86,15 @@ public void eliminar(int numero){
       borrar[numero][i] = -1;
       borrar[i][numero]= -1;
     }
-}    
+  setMaximo(getMaximo()-1);
+}
+
+public int[] buscar(int columnas){
+    setBuscados(new int[getMaximo()]);
+    for (int i = 0; i < getMaximo(); i++) {
+      getBuscados()[i] = getMatrix()[columnas][i];  
+    }
+    return getBuscados();
+}
+
 }

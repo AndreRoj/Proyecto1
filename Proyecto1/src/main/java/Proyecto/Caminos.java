@@ -8,12 +8,14 @@ public class Caminos {
 
  private float distancia;
  private Ciudad ciudad;
- private int cantidadfermona;
+ private float cantidadfermona;
+ private float factorvaporacion;
 
     public Caminos(float distancia, Ciudad ciudad) {
         this.distancia = distancia;
         this.ciudad = ciudad;
         this.cantidadfermona = 0;
+        this.factorvaporacion = 05;
     }
 
     public float getDistancia() {
@@ -32,16 +34,39 @@ public class Caminos {
         this.ciudad = ciudad;
     }
 
-    public int getCantidadfermona() {
+    public float getCantidadfermona() {
         return cantidadfermona;
     }
 
-    public void setCantidadfermona(int cantidadfermona) {
+    public void setCantidadfermona(float cantidadfermona) {
         this.cantidadfermona = cantidadfermona;
-    }    
+    } 
+
+    public float getFactorvaporacion() {
+        return factorvaporacion;
+    }
+
+    public void setFactorvaporacion(float factorvaporacion) {
+        this.factorvaporacion = factorvaporacion;
+    }
     
- public int evaporacion(){
-  return 0;   
+ public void evaporacion(){
+  float t = 1-getFactorvaporacion(); 
+    if(getCantidadfermona() ==0){   
+       float r = 1/getCiudad().getCiudadmax(); 
+       setCantidadfermona(r*t);
+     }else{
+     setCantidadfermona(getCantidadfermona()*t);   
+    }
  } 
- 
+
+public void aumentofermonas(int cantidadhormigas){
+     float t = 1/getDistancia() * cantidadhormigas; 
+    if(getCantidadfermona() ==0){   
+       float r = 1/getCiudad().getCiudadmax(); 
+       setCantidadfermona(r+t);
+     }else{
+     setCantidadfermona(getCantidadfermona()+t);   
+    }
+} 
 }

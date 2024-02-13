@@ -3,24 +3,15 @@ package Proyecto;
 
 public class Ciudad {
 
-private int visibilidad;
-// cantidad de caminos unidos entre si por cada ciudad//
+private int name;   
 private int unidos;
 //cantidad total de ciudades que hay//
-private int ciudadmax;    
+private int ciudadmax;
 
     public Ciudad() {
-        this.visibilidad = 2;
         this.unidos = 0;
         this.ciudadmax = 0;
-    }
-
-    public int getVisibilidad() {
-        return visibilidad;
-    }
-
-    public void setVisibilidad(int visibilidad) {
-        this.visibilidad = visibilidad;
+        this.name = 1;
     }
 
     public int getUnidos() {
@@ -39,4 +30,11 @@ private int ciudadmax;
         this.ciudadmax = ciudadmax;
     }
 
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
+        this.name = name;
+    }
 }
