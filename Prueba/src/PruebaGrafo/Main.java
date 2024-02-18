@@ -19,10 +19,10 @@ public class Main {
      graph.addEdge( "BC", "B", "C" );
      for (Node node : graph) {
         node.setAttribute("ui.label", node.getId());
-    }
+      }
      for (Edge e : graph.getEachEdge()) {
         e.addAttribute("ui.label", 1);
-          }
+     }
      graph.display();
                
     }
