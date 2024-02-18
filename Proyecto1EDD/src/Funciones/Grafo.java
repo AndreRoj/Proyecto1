@@ -28,16 +28,17 @@ public class Grafo {
                 if(matriz.getMatrix() [i][j] != 0){
                     String origen =  Integer.toString(i+1);
                     String end =  Integer.toString(j+1);
-                    graph.addEdge( origen+end, origen, end );
+                    float distancia = matriz.getMatrix()[i][j];
+                    graph.addEdge(origen+end, origen, end ).setAttribute("ui.label",distancia);
+                    
+                    
                 }   
             }
         }
         for (Node node : graph) {
         node.setAttribute("ui.label", node.getId());
         }
-        for (Edge e : graph.getEachEdge()) {
-        e.addAttribute("ui.label");
-        }
+        
         graph.display();
     }
 }
