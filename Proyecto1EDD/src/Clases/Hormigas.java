@@ -1,6 +1,9 @@
 
 package Clases;
 
+import Funciones.Matriz;
+import Funciones.Global;
+
 public class Hormigas {
     private Ciudad ciudadinicial;
     private Ciudad ciudadactual;
@@ -69,7 +72,7 @@ public class Hormigas {
     
     //sumatoria que se pide en el calculo de posibilidades de eleccion de camino
     public int sumatoria(){
-        int[] distancia = getMatriz().buscar(getCiudadactual().getName());
+        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
         int a = 0;
         int r = 1/getCiudadinicial().getCiudadmax();
         for (int i = 0; i < distancia.length; i++) {
@@ -93,7 +96,7 @@ public class Hormigas {
     
     //calculo de todos los caminos para ser elegidos guardados en un array 
     public int[] eleccioncamino(){
-        int[] distancia = getMatriz().buscar(getCiudadactual().getName());
+        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
         int a = this.sumatoria();
         int [] resultados = new int [distancia.length];
         int r = 1/getCiudadinicial().getCiudadmax();
@@ -104,6 +107,6 @@ public class Hormigas {
             int guardar = parte*parte2/a;
             resultados[i] = guardar;
         }
-      return resultados;  
+        return resultados;  
  }  
 }
