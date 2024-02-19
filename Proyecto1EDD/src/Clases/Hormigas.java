@@ -95,7 +95,7 @@ public class Hormigas {
     } 
     
     //calculo de todos los caminos para ser elegidos guardados en un array 
-    public int[] eleccioncamino(){
+    public void eleccioncamino(){
         double random = Math.random();
         float[] distancia = getMatriz().buscar(getCiudadactual().getName());
         int a = this.sumatoria();
@@ -120,8 +120,6 @@ public class Hormigas {
                 break;
             } 
         }
-        //comodar este codigoooo
-        return null;
       
     }  
 }
