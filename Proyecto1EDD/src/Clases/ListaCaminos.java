@@ -79,18 +79,39 @@ public class ListaCaminos {
         }
     }
   
-  public Camino recorrer(int numero){
-     NodoCamino pointer = getHead(); 
-     int a = 0;
-     if (numero >= getSize()){
-         System.out.println("valor incorrecto, ingresar nuevamente");
-         return null;
-     }else{
-     while(a<numero &&  pointer != null){
-       pointer = pointer.getNext();
-       a++;
-     }
-     return pointer.getElement();
-  }
- }   
+    public Camino recorrer(int numero){
+        NodoCamino pointer = getHead(); 
+        int a = 0;
+        if (numero >= getSize()){
+            System.out.println("valor incorrecto, ingresar nuevamente");
+            return null;
+        }else{
+        while(a<numero &&  pointer != null){
+            pointer = pointer.getNext();
+            a++;
+        }
+        return pointer.getElement();
+        }
+    }   
+    
+    public void buscarCiudadName(int numero){
+        NodoCamino pointer = getHead();
+        while (pointer != null){
+          if (pointer.getElement().getCiudadinicial().getName() == numero){
+            this.insertFinal(pointer.getElement());
+          }
+        }
+    }   
+ 
+    public Camino buscarDistancia (float numero){
+        NodoCamino pointer = getHead();
+        while (pointer != null){
+            if (pointer.getElement().getDistancia() == numero){
+            return pointer.getElement();
+            }
+        pointer = pointer.getNext();
+        }
+    return null;   
+    }
+    
 }

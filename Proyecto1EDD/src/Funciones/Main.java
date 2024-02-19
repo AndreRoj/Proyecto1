@@ -23,7 +23,7 @@ public class Main {
 //            System.out.println(copia.buscar(1)[i]);
 //        }
 //        matrix.Show();
-        
+        System.out.println("acomodar un código de hormigas en eleccion de camino");
         Ventana1 ventana1 = new Ventana1();
         ventana1.setVisible(true);
         

@@ -96,17 +96,32 @@ public class Hormigas {
     
     //calculo de todos los caminos para ser elegidos guardados en un array 
     public int[] eleccioncamino(){
+        double random = Math.random();
         float[] distancia = getMatriz().buscar(getCiudadactual().getName());
         int a = this.sumatoria();
-        int [] resultados = new int [distancia.length];
+        float [] resultados = new float [distancia.length];
         int r = 1/getCiudadinicial().getCiudadmax();
+        ListaCaminos lista = new ListaCaminos();
+        for (int i = 0; i < getGlobal().getListacaminos().getSize(); i++) {
+            getGlobal().getListacaminos().recorrer(i).setCantidadfermona(r);
+            lista.buscarCiudadName(getCiudadactual().getName()); 
+        }
         for (int i = 0; i < distancia.length; i++){
-            int parte = this.potencia(r, getGlobal().getImporfermonas());
+            int parte = this.potencia(lista.recorrer(i).getCantidadfermona(), getGlobal().getImporfermonas());
             float n = 1/distancia[i];
             int parte2 = this.potencia(n, getGlobal().getVisibilidad());
-            int guardar = parte*parte2/a;
+            float guardar = parte*parte2/a;
             resultados[i] = guardar;
         }
-        return resultados;  
- }  
+        for (int i = 0; i < distancia.length; i++) {
+            if(random < resultados[i] && random > resultados[i+1]){
+                setCamino(lista.buscarDistancia(resultados[i]));
+                setCiudadactual(getCamino().getCiudadfinal());
+                break;
+            } 
+        }
+        //comodar este codigoooo
+        return null;
+      
+    }  
 }

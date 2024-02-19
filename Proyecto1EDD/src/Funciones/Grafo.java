@@ -22,7 +22,6 @@ public class Grafo {
     public void addValuesToGrafo(){
         Matriz matriz = getGlobal().getMatriz();
         Graph graph = new SingleGraph("tutorial1");
-        int id = 1;
         for (int i = 0; i < getGlobal().getMatriz().getMaximo(); i++) {
             for (int j = 0; j < getGlobal().getMatriz().getMaximo(); j++) {
                 graph.setStrict(false);
@@ -45,6 +44,7 @@ public class Grafo {
         }
         for (Node node : graph) {
         node.setAttribute("ui.label", node.getId());
+        //node.addAttribute("ui.size", 100);
         }
         graph.display();
         
