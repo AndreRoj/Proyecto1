@@ -22,6 +22,7 @@ public class Grafo {
     public void addValuesToGrafo(){
         Matriz matriz = getGlobal().getMatriz();
         Graph graph = new SingleGraph("tutorial1");
+        int id = 1;
         for (int i = 0; i < getGlobal().getMatriz().getMaximo(); i++) {
             for (int j = 0; j < getGlobal().getMatriz().getMaximo(); j++) {
                 graph.setStrict(false);
@@ -29,17 +30,23 @@ public class Grafo {
                 if(matriz.getMatrix() [i][j] != 0){
                     String origen =  Integer.toString(i+1);
                     String end =  Integer.toString(j+1);
+                    Node a = graph.addNode(origen);
+                    Node b = graph.addNode(end);
                     float distancia = matriz.getMatrix()[i][j];
-                    graph.addEdge(origen+end, origen, end ).setAttribute("ui.label",distancia);
-                    graph.setAttribute("ui.quality");
-                    graph.setAttribute("ui.antialias");
+                    try{
+                        graph.addEdge(origen+end, a, b ).setAttribute("ui.label",distancia);
+                        graph.setAttribute("ui.quality");
+                        graph.setAttribute("ui.antialias");
+                    }catch(Exception e){
+                        continue;
+                    }
                 }   
             }
         }
         for (Node node : graph) {
         node.setAttribute("ui.label", node.getId());
         }
-        
         graph.display();
+        
     }
 }

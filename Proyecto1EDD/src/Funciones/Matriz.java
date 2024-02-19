@@ -142,6 +142,7 @@ public class Matriz {
 
     public void cambiarvaloresespecifico(float valor, int columna, int fila){
         getMatrix()[fila-1][columna-1] = valor;   
+        getMatrix()[columna-1][fila-1] = valor;   
     }
 
     public void llenarmattriz(){

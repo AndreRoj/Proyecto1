@@ -178,11 +178,14 @@ public class Ventana6 extends javax.swing.JFrame {
         Matriz copia = new Matriz(5);
         Grafo grafo =  new Grafo();
         matrix.crearmatrix();
-        matrix.cambiarvalorescolumna(5, 0);
-        matrix.cambiarvaloresespecifico(8,1,3);
-        matrix.cambiarvaloresespecifico(7, 4, 3);
+        //matrix.cambiarvalorescolumna(5, 0);
+        matrix.cambiarvaloresespecifico(8,3,2);
+        matrix.cambiarvaloresespecifico(7, 3, 4);
+        matrix.cambiarvaloresespecifico(3.4f,1,5);
+        matrix.cambiarvaloresespecifico(5.8f, 5, 4);
         Global global  = new Global(1,5,matrix);
         copia.setMatrix(matrix.getMatrix());
+        matrix.Show();
         grafo.setGlobal(global);
         grafo.addValuesToGrafo();
     }//GEN-LAST:event_iniciarGrafoActionPerformed
