@@ -150,7 +150,6 @@ public class Matriz {
         for (int i = 0; i < getGlobal().getListacaminos().getSize(); i++) {
             Camino camino = getGlobal().getListacaminos().recorrer(i);
             matriz.cambiarvaloresespecifico(camino.getDistancia(), camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
-            matriz.cambiarvaloresespecifico(camino.getDistancia(), camino.getCiudadinicial().getName(), camino.getCiudadfinal().getName());
         }   
     }
 
