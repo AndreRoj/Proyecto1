@@ -1,6 +1,7 @@
 
 package Funciones;
 
+import java.awt.Color;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -30,8 +31,8 @@ public class Grafo {
                     String end =  Integer.toString(j+1);
                     float distancia = matriz.getMatrix()[i][j];
                     graph.addEdge(origen+end, origen, end ).setAttribute("ui.label",distancia);
-                    
-                    
+                    graph.setAttribute("ui.quality");
+                    graph.setAttribute("ui.antialias");
                 }   
             }
         }
