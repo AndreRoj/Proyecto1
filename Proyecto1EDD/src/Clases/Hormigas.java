@@ -10,14 +10,16 @@ public class Hormigas {
     private Ciudad ciudadfinal;
     private Camino camino;
     private Global global;
+    private Matriz matriz_feromonas;
     private Matriz matriz;
 
-    public Hormigas(Ciudad ciudadinicial, Ciudad ciudadfinal, Matriz matriz) {
+    public Hormigas(Ciudad ciudadinicial, Ciudad ciudadfinal) {
         this.ciudadinicial = ciudadinicial;
         this.ciudadactual = ciudadinicial;
         this.ciudadfinal = ciudadfinal;
         this.camino = null;
-        this.matriz = matriz;
+        this.matriz = global.getMatriz();
+        this.matriz_feromonas = global.getMatriz_feromonas();
     }
 
     public Ciudad getCiudadinicial() {
@@ -52,7 +54,6 @@ public class Hormigas {
         this.camino = camino;
     }
 
-
     public Matriz getMatriz() {
         return matriz;
     }
@@ -60,15 +61,6 @@ public class Hormigas {
     public void setMatriz(Matriz matriz) {
         this.matriz = matriz;
     }
-
-    public Global getGlobal() {
-        return global;
-    }
-
-    public void setGlobal(Global global) {
-        this.global = global;
-    }
-
     
     //sumatoria que se pide en el calculo de posibilidades de eleccion de camino
     public int sumatoria(){
@@ -76,9 +68,9 @@ public class Hormigas {
         int a = 0;
         int r = 1/getCiudadinicial().getCiudadmax();
         for (int i = 0; i < distancia.length; i++) {
-            int parte = this.potencia(r, getGlobal().getImporfermonas());
+            int parte = this.potencia(r, global.getImporfermonas());
             float n = 1/distancia[i];
-            int parte2 = this.potencia(n, getGlobal().getVisibilidad());
+            int parte2 = this.potencia(n, global.getVisibilidad());
             a += parte*parte2;
         }
         return a;  
@@ -102,14 +94,14 @@ public class Hormigas {
         float [] resultados = new float [distancia.length];
         int r = 1/getCiudadinicial().getCiudadmax();
         ListaCaminos lista = new ListaCaminos();
-        for (int i = 0; i < getGlobal().getListacaminos().getSize(); i++) {
-            getGlobal().getListacaminos().recorrer(i).setCantidadfermona(r);
+        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
+            global.getListacaminos().recorrer(i).setCantidadfermona(r);
             lista.buscarCiudadName(getCiudadactual().getName()); 
         }
         for (int i = 0; i < distancia.length; i++){
-            int parte = this.potencia(lista.recorrer(i).getCantidadfermona(), getGlobal().getImporfermonas());
+            int parte = this.potencia(lista.recorrer(i).getCantidadfermona(), global.getImporfermonas());
             float n = 1/distancia[i];
-            int parte2 = this.potencia(n, getGlobal().getVisibilidad());
+            int parte2 = this.potencia(n, global.getVisibilidad());
             float guardar = parte*parte2/a;
             resultados[i] = guardar;
         }
@@ -120,6 +112,6 @@ public class Hormigas {
                 break;
             } 
         }
-      
+        //Sería bueno un return camino;
     }  
 }

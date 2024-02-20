@@ -174,18 +174,22 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarGrafoActionPerformed
+        Global global  = new Global(1,5);
+        
         Matriz matrix = new Matriz(5);
-        Matriz copia = new Matriz(5);
+        //Matriz copia = new Matriz(5);
         Grafo grafo =  new Grafo();
         matrix.crearmatrix();
         //matrix.cambiarvalorescolumna(5, 0);
+        global.setMatriz_feromonas(matrix);
         matrix.cambiarvaloresespecifico(8,3,2);
         matrix.cambiarvaloresespecifico(7, 3, 4);
         matrix.cambiarvaloresespecifico(3.4f,1,5);
         matrix.cambiarvaloresespecifico(5.8f, 5, 4);
-        Global global  = new Global(1,5,matrix);
-        copia.setMatrix(matrix.getMatrix());
-        matrix.Show();
+        
+        global.setMatriz(matrix);
+        //copia.setMatrix(global.getMatriz().getMatrix());
+        global.getMatriz().Show();
         grafo.setGlobal(global);
         grafo.addValuesToGrafo();
     }//GEN-LAST:event_iniciarGrafoActionPerformed

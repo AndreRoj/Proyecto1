@@ -1,7 +1,7 @@
 
 package Clases;
 
-import Funciones.Global;
+//import Funciones.Global;
 
 public class Ciudad {
 
@@ -10,7 +10,7 @@ private int unidos;
 //cantidad total de ciudades que hay//
 private int ciudadmax;
 private int ciudadlimite;
-private Global global;
+//private Global global;
 
 
     public Ciudad(int name) {
@@ -50,14 +50,6 @@ private Global global;
 
     public void setCiudadlimite(int ciudadlimite) {
         this.ciudadlimite = ciudadlimite;
-    }
-
-    public Global getGlobal() {
-        return global;
-    }
-
-    public void setGlobal(Global global) {
-        this.global = global;
     }
 
 }

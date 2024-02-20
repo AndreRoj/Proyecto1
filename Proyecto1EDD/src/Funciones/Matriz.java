@@ -49,14 +49,15 @@ public class Matriz {
         this.value = value;
     }
 
-    public Global getGlobal() {
-        return global;
-    }
-
-    public void setGlobal(Global global) {
-        this.global = global;
-    }
-        
+//    public Global getGlobal() {
+//        return global;
+//    }
+//
+//    public void setGlobal(Global global) {
+//        this.global = global;
+//    }
+    
+    //crea una matriz con puros valores de cero, para que luego sean modificados
     public float[][] crearmatrix(){
         setMatrix(new float [getMaximo()][getMaximo()]);
         for (int i = 0; i < getMaximo(); i++) {
@@ -146,11 +147,26 @@ public class Matriz {
     }
 
     public void llenarmattriz(){
-        Matriz matriz = getGlobal().getMatriz();
-        for (int i = 0; i < getGlobal().getListacaminos().getSize(); i++) {
-            Camino camino = getGlobal().getListacaminos().recorrer(i);
+        Matriz matriz = global.getMatriz();
+        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
+            Camino camino = global.getListacaminos().recorrer(i);
             matriz.cambiarvaloresespecifico(camino.getDistancia(), camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
-        }   
+        }
+        global.setMatriz(matriz);
     }
+    
+    //para definir las ferromanas iniciales de la matriz que luego será utilizado para el recorrido
+    public void feromonasIniciales(){
+        Matriz matriz_f = global.getMatriz_feromonas();
+        int cantidad_ciudades = global.getListaciudades().getSize();
+        float cantidad_ciud_f = (float) cantidad_ciudades;
+        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
+            Camino camino = global.getListacaminos().recorrer(i);
+            float feromona_inicial = 1/cantidad_ciud_f;
+            matriz_f.cambiarvaloresespecifico(feromona_inicial, camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
+        }
+        global.setMatriz_feromonas(matriz_f);
+    }
+    
 
 }

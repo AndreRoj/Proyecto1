@@ -18,7 +18,6 @@ public class Grafo {
         this.global = global;
     }
     
-    
     public void addValuesToGrafo(){
         Matriz matriz = getGlobal().getMatriz();
         Graph graph = new SingleGraph("tutorial1");
