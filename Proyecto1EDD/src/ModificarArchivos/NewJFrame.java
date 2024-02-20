@@ -4,12 +4,19 @@
  */
 package ModificarArchivos;
 
+import Clases.ListaCaminos;
+import Clases.ListaCiudad;
+import Funciones.Global;
+import static ModificarArchivos.ConversionLista.DocumentoALista;
+import static ModificarArchivos.ConversionLista.obtenerArchivo;
 import static ModificarArchivos.ModificarArchivo.AñadirElemento;
 import static ModificarArchivos.ModificarArchivo.AñadirSimulacion;
-import static ModificarArchivos.ModificarArchivo.EliminarCiudad;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static ModificarArchivos.ModificarArchivo.EliminarElemento;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -120,13 +127,25 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AñadirElemento("/home/luciano/Desktop/Universidad/5to trimestre/Proyecto 1/java/branch luciano/Proyecto1EDD/Inserte el nombre del archivo","aristas","aristas");
-        
+       JFileChooser file = obtenerArchivo();
+       ListaCiudad listaciudades = new ListaCiudad();
+       ListaCaminos listacaminos = new ListaCaminos();
+        try {
+            DocumentoALista(listaciudades, listacaminos, file.getSelectedFile());
+            listaciudades.print();
+            Global global = new Global();
+            global.setListacaminos(listacaminos);
+            global.setListaciudades(listaciudades);
+            System.out.println(listacaminos.getSize());
+             
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        EliminarCiudad("/home/luciano/Desktop/Universidad/5to trimestre/Proyecto 1/java/branch luciano/Proyecto1EDD/Inserte el nombre del archivo","aristas");
+        EliminarElemento("/home/luciano/Downloads/Telegram Desktop/Datos_ciudad.txt","7");
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

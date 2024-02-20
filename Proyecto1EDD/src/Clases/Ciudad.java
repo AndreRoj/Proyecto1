@@ -1,6 +1,8 @@
 
 package Clases;
 
+import Funciones.Global;
+
 public class Ciudad {
 
  private int name;   

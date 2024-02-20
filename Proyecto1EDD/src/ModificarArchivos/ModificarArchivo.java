@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 /**
  *
@@ -32,9 +31,9 @@ import java.util.List;
  */
 public class ModificarArchivo
         {
+    // Tanto añadir Elemento como Eliminar Elemento consiste en crear un nuevo archivo con el cambio a hacer, y eliminar el anterior que no contiene el cambio
     
-    
-        static void AñadirElemento(String file, String lineNeeded, String lineToAppend)
+       static void AñadirElemento(String file, String lineNeeded, String lineToAppend) //file es la dirección del archivo, lineNeeded es la linea a agregar.
       {
 
     try {
@@ -53,7 +52,7 @@ public class ModificarArchivo
 
       String line = null;
 
-      
+      //Esta parte lee todo el documento linea por linea
       while ((line = br.readLine()) != null) {
 
         
@@ -75,7 +74,7 @@ public class ModificarArchivo
           }
         
       }
-      JOptionPane.showMessageDialog(null, "El Usuario fue eliminado existosamente", "Operación existosa", JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "El Elemento fue eliminado existosamente", "Operación existosa", JOptionPane.INFORMATION_MESSAGE);
 
       pw.close();
       br.close();
@@ -95,10 +94,9 @@ public class ModificarArchivo
     catch (IOException ex) {
       ex.printStackTrace();
     }
-    // Acá se encuentran los archivos que utiliza el usuario para los inputs. Los de arriba son mayoritariamente para ejecutar el código
   }
     
-        static void EliminarCiudad(String file, String lineToRemove)
+        static void EliminarElemento(String file, String lineToRemove)
       {
 
     try {
@@ -126,7 +124,7 @@ public class ModificarArchivo
           pw.flush();
         }
       }
-      JOptionPane.showMessageDialog(null, "El Usuario fue eliminado existosamente", "Operación existosa", JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "El Elemento fue eliminado existosamente", "Operación existosa", JOptionPane.INFORMATION_MESSAGE);
 
       pw.close();
       br.close();
@@ -180,15 +178,15 @@ public class ModificarArchivo
                //   JOptionPane.showMessageDialog(null, Mensaje);
                 
                 if(validador(Archivo.toString(),user)){
-                    EliminarCiudad(Archivo.toString(), user);
+                    EliminarElemento(Archivo.toString(), user);
                 }else{
                             JOptionPane.showMessageDialog(null, "ERROR:  No se encontro este elemento registrado", "Alerta", JOptionPane.ERROR_MESSAGE);
                 }
     }
             static void AñadirSimulacion(String nombre) throws IOException
       {
-          File archivo = new File("/home/luciano/Desktop/Universidad/5to trimestre/Proyecto 1/java");
-            archivo = new File(nombre);
+          File archivo = new File("/home/luciano/Desktop/Universidad/5to trimestre/Proyecto 1/java" + nombre);
+            
                 archivo.createNewFile();
         System.out.println("Prueba " + archivo.getAbsolutePath().toString());
 

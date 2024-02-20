@@ -17,7 +17,7 @@ public class Camino {
     private float cantidadfermona;
     private float factorvaporacion;
 
-    public Camino(float distancia, Ciudad ciudadinicial, Ciudad ciudadfinal) {
+    public Camino(Ciudad ciudadinicial, Ciudad ciudadfinal, float distancia) {
         this.distancia = distancia;
         this.ciudadinicial = ciudadinicial;
         this.cantidadfermona = 0;
