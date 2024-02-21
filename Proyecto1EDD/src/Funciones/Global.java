@@ -133,6 +133,7 @@ public class Global {
         int count_hormigas = 0;
         while(count_hormigas < hormigas){
             Hormigas hormiga = new Hormigas(getCiudadInicial(),getCiudadFinal());
+            hormiga.eleccioncamino();
             listahormigas.insertBegin(hormiga);
             count_hormigas++;
         }
