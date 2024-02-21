@@ -29,8 +29,20 @@ public class Grafo {
                 if(matriz.getMatrix() [i][j] != 0){
                     String origen =  Integer.toString(i+1);
                     String end =  Integer.toString(j+1);
-                    Node a = graph.addNode(origen);
+                    
+                    
+                    Node a = graph.addNode(origen);         
                     Node b = graph.addNode(end);
+                    
+                 
+                    a.setAttribute("ui.style", "size: 30px, 30px; fill-color: rgb(76,60,76);" );
+                    b.setAttribute("ui.style", "size: 30px, 30px; fill-color: rgb(76,60,76);" );
+                    
+                    /*a.setAttribute("ui.style", "fill-color: rgb(76,60,76);");
+                    b.setAttribute("ui.style", "fill-color: rgb(76,60,76);");*/
+                    
+                 
+                    
                     float distancia = matriz.getMatrix()[i][j];
                     try{
                         graph.addEdge(origen+end, a, b ).setAttribute("ui.label",distancia);
