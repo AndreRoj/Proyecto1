@@ -10,8 +10,6 @@ private int unidos;
 //cantidad total de ciudades que hay//
 private int ciudadmax;
 private int ciudadlimite;
-//private Global global;
-
 
     public Ciudad(int name) {
         this.unidos = 0;

@@ -68,20 +68,21 @@ public class Hormigas {
         int a = 0;
         int r = 1/getCiudadinicial().getCiudadmax();
         for (int i = 0; i < distancia.length; i++) {
-            int parte = this.potencia(r, global.getImporfermonas());
+            float parte = this.potencia(r, global.getImporfermonas());
             float n = 1/distancia[i];
-            int parte2 = this.potencia(n, global.getVisibilidad());
+            float parte2 = this.potencia(n, global.getVisibilidad());
             a += parte*parte2;
         }
         return a;  
     }
     
     //metodo para elevar, no podemos usar Math pow, por eso se creo
-    public int potencia(float numero, int elevado){
+    public float potencia(float numero, int elevado){
         int a = 1;
-        int potencia = 0;
+        float potencia = numero;
         while(a<elevado){
-            potencia *= potencia;   
+            potencia *= numero;   
+            a++;
         }
         return potencia; 
     } 
@@ -99,9 +100,9 @@ public class Hormigas {
             lista.buscarCiudadName(getCiudadactual().getName()); 
         }
         for (int i = 0; i < distancia.length; i++){
-            int parte = this.potencia(lista.recorrer(i).getCantidadfermona(), global.getImporfermonas());
+            float parte = this.potencia(lista.recorrer(i).getCantidadfermona(), global.getImporfermonas());
             float n = 1/distancia[i];
-            int parte2 = this.potencia(n, global.getVisibilidad());
+            float parte2 = this.potencia(n, global.getVisibilidad());
             float guardar = parte*parte2/a;
             resultados[i] = guardar;
         }
@@ -112,6 +113,6 @@ public class Hormigas {
                 break;
             } 
         }
-        //Sería bueno un return camino;
+       
     }  
 }

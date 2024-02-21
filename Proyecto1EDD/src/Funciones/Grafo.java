@@ -31,6 +31,8 @@ public class Grafo {
                     Node a = graph.addNode(origen);
                     Node b = graph.addNode(end);
                     float distancia = matriz.getMatrix()[i][j];
+                    a.setAttribute("ui.style", "size: 30px, 30px; fill-color: rgb(76,60,76);");
+                    b.setAttribute("ui.style", "size: 30px, 30px; fill-color: rgb(76,60,76);");
                     try{
                         graph.addEdge(origen+end, a, b ).setAttribute("ui.label",distancia);
                         graph.setAttribute("ui.quality");
