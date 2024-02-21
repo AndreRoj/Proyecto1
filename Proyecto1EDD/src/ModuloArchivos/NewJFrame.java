@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ModificarArchivos;
+package ModuloArchivos;
 
 import Clases.ListaCaminos;
 import Clases.ListaCiudad;
 import Funciones.Global;
-import static ModificarArchivos.ConversionLista.DocumentoALista;
-import static ModificarArchivos.ConversionLista.obtenerArchivo;
-import static ModificarArchivos.ModificarArchivo.AñadirElemento;
-import static ModificarArchivos.ModificarArchivo.AñadirSimulacion;
+import static ModuloArchivos.ConversionLista.DocumentoALista;
+import static ModuloArchivos.ConversionLista.obtenerArchivo;
+import static ModuloArchivos.ModificarArchivo.AñadirElemento;
+import static ModuloArchivos.ModificarArchivo.AñadirSimulacion;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static ModificarArchivos.ModificarArchivo.EliminarElemento;
+import static ModuloArchivos.ModificarArchivo.EliminarElemento;
 import java.io.File;
 import javax.swing.JFileChooser;
 

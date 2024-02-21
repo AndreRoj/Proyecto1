@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ModificarArchivos;
+package ModuloArchivos;
 
 import Clases.Camino;
 import Clases.Ciudad;
 import Clases.ListaCaminos;
 import Clases.ListaCiudad;
-import static ModificarArchivos.ModificarArchivo.AñadirElemento;
+import static ModuloArchivos.ModificarArchivo.AñadirElemento;
 
 import java.io.BufferedReader;
 import java.io.File;
