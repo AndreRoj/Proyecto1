@@ -4,6 +4,19 @@
  */
 package Interfaces;
 
+import Clases.Camino;
+import Clases.Ciudad;
+import Clases.ListaCaminos;
+import Clases.ListaCiudad;
+import Clases.NodoCiudad;
+import Funciones.Global;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Jose
@@ -34,14 +47,14 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         panelRound2 = new Clases.PanelRound();
         cargarArchivo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        nombreArchivo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         panelRound1 = new Clases.PanelRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(490, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,18 +85,20 @@ public class Ventana2 extends javax.swing.JFrame {
                 cargarArchivoActionPerformed(evt);
             }
         });
-        panelRound2.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        panelRound2.add(cargarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 180, 60));
 
-        jLabel1.setText("jLabel1");
-        panelRound2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 300, 20));
+        nombreArchivo.setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
+        nombreArchivo.setForeground(new java.awt.Color(51, 51, 51));
+        nombreArchivo.setText("...");
+        panelRound2.add(nombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 300, 20));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Nombre del archivo cargado:");
+        panelRound2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel2.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 430, 180));
-
-        jLabel2.setBackground(new java.awt.Color(253, 253, 253));
-        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel2.setText("y la distancias entre ellas");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(253, 253, 253));
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
@@ -94,7 +109,13 @@ public class Ventana2 extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(253, 253, 253));
         jLabel3.setText("(Solo archivos de tipo .txt)");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+
+        jLabel5.setBackground(new java.awt.Color(253, 253, 253));
+        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(253, 253, 253));
+        jLabel5.setText("y la distancias entre ellas");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 370));
 
@@ -116,13 +137,107 @@ public class Ventana2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
-        // TODO add your handling code here:
+        //Para cargar el archivo
+        JFileChooser file = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt");
+        file.setFileFilter(filter);
+        file.setAcceptAllFileFilterUsed(false);
+        int result = file.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            Global.setFile(file.getSelectedFile());
+            nombreArchivo.setText(Global.getFile().getName());
+            JOptionPane.showMessageDialog(null, "Su archivo a sido cargado con exito, haga click en 'MENÚ'");
+        }
     }//GEN-LAST:event_cargarArchivoActionPerformed
-
+    
+    private boolean FileIsEmpty(){
+        return Global.getFile() == null;
+    }
+    
+    private Ciudad definirCiudad(int element, ListaCiudad listaciudad){
+        NodoCiudad pointer = listaciudad.getHead();
+        while(pointer.getElement().getName() != element){
+            pointer = pointer.getNext();
+        }
+        return pointer.getElement();
+    }
+    
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
-        Ventana3 ventana3 = new Ventana3();
-        ventana3.setVisible(true);
-        this.dispose();
+        if (FileIsEmpty()){
+            //SE MUESTRA UN MENSAJE DE ERROR EN CASO DE QUE NO SE HAYA SELECCIONADO NINGUN ARCHIVO
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un archivo primero");
+        }else{
+            //CODIGO PARA LEERLO//
+            String filePath = Global.getFile().getAbsolutePath();
+            ListaCaminos listacaminos = new ListaCaminos();
+            ListaCiudad listaciudad = new ListaCiudad();
+            try {
+            // Crear un objeto BufferedReader para leer el archivo
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            String linea;
+            String separador = ",";
+            //para verificación durante la lectura
+            boolean readingCities = true;
+            // Leer la primera línea del archivo (encabezado)
+            linea = br.readLine();
+            // Leer las siguientes líneas del archivo (datos)
+            while ((linea = br.readLine()) != null) {
+                if(linea.equals("ciudad")){
+                    readingCities = true;
+                    continue;  // Saltamos esta línea para no guardar "Ciudad"
+                }
+                if(linea.equals("arista")){
+                    readingCities = false;
+                    continue;  // Saltamos esta línea para no guardar "Arista"
+                }
+                if(readingCities){
+                     // Crear un objeto Ciudad con los campos leídos
+                    Ciudad ciudad = new Ciudad(Integer.parseInt(linea));
+                    // Agregar el objeto nodoCiudad a la lista de usuarios
+                    listaciudad.insertFinal(ciudad);    
+                }
+                if(!readingCities){
+                    // Dividir la línea por el separador y guardar los campos en un arreglo
+                    String[] campos = linea.split(separador);
+                    //Se usa la función para buscar el objeto ciudad en la lista para los campos del objeto Camino
+                    Ciudad c_inicial = definirCiudad(Integer.parseInt(campos[0]),listaciudad);
+                    Ciudad c_final = definirCiudad(Integer.parseInt(campos[1]),listaciudad);
+                    //Crear un objeto Camino con los campos leídos
+                    Camino camino = new Camino(c_inicial, c_final, Float.parseFloat(campos[2]));
+                    // Agregar el objeto Camino a la lista de caminos
+                    listacaminos.insertFinal(camino);
+                } 
+            }
+            //se guarda la lista de ciudades en el global para su uso
+            Global.setListaciudades(listaciudad);
+            //se guarda la lista de caminos en el global para su uso
+            Global.setListacaminos(listacaminos);
+            // Cerrar el objeto BufferedReader
+            br.close();
+            System.out.println("CIUDADES");
+            Global.getListaciudades().print();
+            System.out.println("CAMINOS");
+            Global.getListacaminos().print();
+            //Cargar la siguiente ventana,Ventana3 la que posee las acciones del programa si cumple con que alla un mínimo de 4 ciudades o un máximo de
+            //20 ciudades
+            if(Global.getListaciudades().getSize() > 20 || Global.getListaciudades().getSize() < 4){
+                if(Global.getListaciudades().getSize() > 20){
+                    JOptionPane.showMessageDialog(null,"Solo se aceptan un máximo de 20 ciudades, por favor elimine un par de ciudades");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Se necesitan un mínimo de 4 ciudades para iniciar el programa, por favor agrege más ciudades");
+                }
+            }else{
+                Ventana3 ventana3 = new Ventana3();
+                ventana3.setVisible(true);
+                this.dispose();
+            }
+            
+        } catch (Exception e) {
+            // Mostrar por consola el mensaje de la excepción
+            JOptionPane.showMessageDialog(null,"Error al leer el archivo: "+e.getMessage()+"\nVerifique que no, haya espacios vacios, comas extra, etc");
+        }
+        }
+        
     }//GEN-LAST:event_menuActionPerformed
 
     /**
@@ -162,13 +277,14 @@ public class Ventana2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cargarArchivo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton menu;
+    private javax.swing.JLabel nombreArchivo;
     private Clases.PanelRound panelRound1;
     private Clases.PanelRound panelRound2;
     // End of variables declaration//GEN-END:variables

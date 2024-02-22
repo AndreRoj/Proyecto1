@@ -114,4 +114,12 @@ public class ListaCaminos {
     return null;   
     }
     
+    public void print() {
+        NodoCamino pointer = getHead();
+        while (pointer != null) {
+            System.out.println("[ "+pointer.getElement().getCiudadinicial().getName()+","+pointer.getElement().getCiudadfinal().getName()+","+pointer.getElement().getDistancia()+ " ]");
+            pointer = pointer.getNext();
+        }
+    }
+    
 }

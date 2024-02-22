@@ -5,7 +5,7 @@ package Clases;
 public class NodoHormiga {
     private Hormigas element;
     private NodoHormiga next;
-
+    
     public NodoHormiga(Hormigas element) {
         this.element = element;
         this.next = null;
