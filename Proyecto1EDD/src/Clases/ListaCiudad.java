@@ -101,7 +101,7 @@ public class ListaCiudad {
     public void print() {
         NodoCiudad pointer = getHead();
         while (pointer != null) {
-            System.out.println("[ "+pointer.getElement() + " ]");
+            System.out.println("[ "+pointer.getElement().getName() + " ]");
             pointer = pointer.getNext();
         }
     }

@@ -8,7 +8,6 @@ public class Matriz {
     private float matrix[][];
     private float buscados[];
     private int value;
-    private Global global;
 
     public Matriz(int maximo) {
         this.maximo = maximo;
@@ -49,14 +48,6 @@ public class Matriz {
         this.value = value;
     }
 
-//    public Global getGlobal() {
-//        return global;
-//    }
-//
-//    public void setGlobal(Global global) {
-//        this.global = global;
-//    }
-    
     //crea una matriz con puros valores de cero, para que luego sean modificados
     public float[][] crearmatrix(){
         setMatrix(new float [getMaximo()][getMaximo()]);
@@ -147,25 +138,25 @@ public class Matriz {
     }
 
     public void llenarmattriz(){
-        Matriz matriz = global.getMatriz();
-        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
-            Camino camino = global.getListacaminos().recorrer(i);
+        Matriz matriz = Global.getMatriz();
+        for (int i = 0; i < Global.getListacaminos().getSize(); i++) {
+            Camino camino = Global.getListacaminos().recorrer(i);
             matriz.cambiarvaloresespecifico(camino.getDistancia(), camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
         }
-        global.setMatriz(matriz);
+        Global.setMatriz(matriz);
     }
     
     //para definir las ferromanas iniciales de la matriz que luego será utilizado para el recorrido
     public void feromonasIniciales(){
-        Matriz matriz_f = global.getMatriz_feromonas();
-        int cantidad_ciudades = global.getListaciudades().getSize();
+        Matriz matriz_f = Global.getMatriz_feromonas();
+        int cantidad_ciudades = Global.getListaciudades().getSize();
         float cantidad_ciud_f = (float) cantidad_ciudades;
-        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
-            Camino camino = global.getListacaminos().recorrer(i);
+        for (int i = 0; i < Global.getListacaminos().getSize(); i++) {
+            Camino camino = Global.getListacaminos().recorrer(i);
             float feromona_inicial = 1/cantidad_ciud_f;
             matriz_f.cambiarvaloresespecifico(feromona_inicial, camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
         }
-        global.setMatriz_feromonas(matriz_f);
+        Global.setMatriz_feromonas(matriz_f);
     }
     
 
