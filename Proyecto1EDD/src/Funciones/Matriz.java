@@ -119,16 +119,16 @@ public class Matriz {
         return getBuscados();
     }
 
-    public void cambiarvalorescolumna(int valor, int columna){
+    public void cambiarvalorescolumna(float valor, int columna){
         for (int i = 0; i < getMaximo(); i++) {
-            getMatrix()[i][columna] = valor;   
+            getMatrix()[i][columna-1] = valor;   
         }  
     }
 
 
-    public void cambiarvaloresfilas(int valor, int filas){
+    public void cambiarvaloresfilas(float valor, int filas){
         for (int i = 0; i < getMaximo(); i++) {
-            getMatrix()[filas][i] = valor;   
+            getMatrix()[filas-1][i] = valor;   
         }  
     }
     

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Clases;
-
+import Funciones.Global;
 /**
  *
  * @author pjroj
@@ -69,7 +69,7 @@ public class Camino {
     public void evaporacion(){
         float t =(float) 1-getFactorvaporacion(); 
         if(getCantidadfermona() ==0){   
-            float r = 1/getCiudadinicial().getCiudadmax(); 
+            float r = 1/(Global.getListaciudades().getSize()); 
             setCantidadfermona(r*t);
         }else{
             setCantidadfermona(getCantidadfermona()*t);   
@@ -79,7 +79,7 @@ public class Camino {
     public void aumentofermonas(int cantidadhormigas){
         float t =(float) 1/getDistancia() * cantidadhormigas; 
         if(getCantidadfermona() ==0){   
-            float r = (float)1/getCiudadinicial().getCiudadmax(); 
+            float r = (float)1/(Global.getListaciudades().getSize()); 
             setCantidadfermona(r+t);
         }else{
             setCantidadfermona(getCantidadfermona()+t);   

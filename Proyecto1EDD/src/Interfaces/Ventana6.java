@@ -189,14 +189,15 @@ public class Ventana6 extends javax.swing.JFrame {
         //matriz_fer.feromonasIniciales();
         //matrix.Show();
         //Global.setMatriz(matrix);
-        System.out.println("matriz");
-        Global.getMatriz().Show();
+        //System.out.println("matriz");
+        //Global.getMatriz().Show();
         
 //        
         ListaCiudad listaciudad = Global.getListaciudades();
         Ciudad ciudadInicial = listaciudad.definirCiudad(1);
         Ciudad ciudadFinal = listaciudad.definirCiudad(4);
-        Global global = new Global(10,10,ciudadInicial,ciudadFinal);
+        Global global = new Global(2,5,ciudadInicial,ciudadFinal);
+        
         global.iniciarCiclo();
 //      
         grafo.addValuesToGrafo();

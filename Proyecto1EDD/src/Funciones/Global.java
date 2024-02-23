@@ -160,25 +160,33 @@ public class Global {
         int ciclos = getCantidadciclos();
         int count_hormigas = 0;
         int count_ciclos = 0;
+        ListaHormigas listahormiga = new ListaHormigas();
         agregarFeromonas();
         while(count_hormigas < hormigas){
             Hormigas hormiga = new Hormigas(getCiudadInicial(),getCiudadFinal());
-            hormiga.eleccioncamino();
-            listahormigas.insertBegin(hormiga);
+            hormiga.setGlobal(this);
+            listahormiga.insertBegin(hormiga);
             count_hormigas++;
         }
-        Global.setListahormigas(listahormigas);
-        count_ciclos++;
+        Global.setListahormigas(listahormiga);
         while(count_ciclos < ciclos){
-            NodoHormiga nodohormiga =  getListahormigas().getHead();
-            while(nodohormiga != null){
-                nodohormiga.getElement().eleccioncamino();
-                nodohormiga.getNext();
+            //System.out.println(count_ciclos);
+            for (int i = 0; i < listahormigas.getSize(); i++) {
+                Hormigas hormiga  = listahormigas.recorrer(i);
+                boolean prueba = hormiga.finalizar();
+                while(hormiga.finalizar()== false){
+                 hormiga.eleccioncamino();
+                 prueba = hormiga.finalizar();
+                }
+            }
+            //NodoHormiga nodohormiga =  getListahormigas().getHead();
+            //while(nodohormiga.getNext() != null){
+                //nodohormiga.getElement().eleccioncamino();
+                //nodohormiga.getNext();
             }
             System.out.println("en ciclo");
             listahormigas.print();
             count_ciclos++;
         }
-        listahormigas.print();
+
     }
-}

@@ -50,7 +50,7 @@ public class ListaHormigas {
         NodoHormiga pointer = getHead();
         int count = 1;
         while (pointer != null) {
-            System.out.println("Hormiga"+count+":[ inicio:"+ pointer.getElement().getCiudadinicial() +" ,actual:"+ pointer.getElement().getCiudadinicial()+" ,final:"+ pointer.getElement().getCiudadinicial()+" ]");
+            System.out.println("Hormiga"+count+":[ inicio:"+ pointer.getElement().getCiudadinicial().getName() +" ,actual:"+ pointer.getElement().getCiudadinicial().getName()+" ,final:"+ pointer.getElement().getCiudadinicial().getName()+" ]");
             pointer = pointer.getNext();
             count++;
         }
@@ -58,5 +58,22 @@ public class ListaHormigas {
     public boolean isEmpty() {
         return getHead() == null;
     }
+
+    public Hormigas recorrer(int numero){
+        NodoHormiga pointer = getHead(); 
+        int a = 0;
+        while(pointer.getNext() != null && a<numero ){
+            pointer = pointer.getNext();
+            a++;
+        }
+        if(numero == 0){
+            return getHead().getElement();
+        }
+        if (numero == getSize()){
+           return pointer.getNext().getElement();
+        }else{
+            return pointer.getElement();
+        }
+    }   
     
 }

@@ -8,6 +8,7 @@ public class Hormigas {
     private Ciudad ciudadinicial;
     private Ciudad ciudadactual;
     private Ciudad ciudadfinal;
+    private Matriz matriz;
     private Camino camino;
     private Global global;
 
@@ -16,6 +17,8 @@ public class Hormigas {
         this.ciudadactual = ciudadinicial;
         this.ciudadfinal = ciudadfinal;
         this.camino = null;
+        this.global = global;
+        this.matriz = Global.getMatriz();
     }
 
     public Ciudad getCiudadinicial() {
@@ -58,18 +61,25 @@ public class Hormigas {
         this.global = global;
     }
 
-    
+    public Matriz getMatriz() {
+        return matriz;
+    }
+
+    public void setMatriz(Matriz matriz) {
+        this.matriz = matriz;
+    }
     
     //sumatoria que se pide en el calculo de posibilidades de eleccion de camino
     public float sumatoria(){
         float[] distancia = Global.getMatriz().buscar(getCiudadactual().getName());
         float a = 0;
-        float r = (float)1/getCiudadinicial().getCiudadmax();
-        System.out.println(getCiudadinicial().getCiudadmax());
+        float r = (float)1/(Global.getListaciudades().getSize());
+        //System.out.println(r);
+        System.out.println(distancia.length);
         for (int i = 0; i < distancia.length; i++) {
-            float parte = this.potencia(r, global.getImporfermonas());
+            float parte = potencia(r, getGlobal().getImporfermonas());
             float n = 1/distancia[i];
-            float parte2 = this.potencia(n, global.getVisibilidad());
+            float parte2 = potencia(n, getGlobal().getVisibilidad());
             a += parte*parte2;
         }
         return a;  
@@ -78,12 +88,16 @@ public class Hormigas {
     //metodo para elevar, no podemos usar Math pow, por eso se creo
     public float potencia(float numero, int elevado){
         int a = 1;
-        float potencia = numero;
+        float b = numero;
+        //System.out.println("antes");
+        //System.out.println(b);
         while(a<elevado){
-            potencia *= numero;   
+            b *= numero;   
             a++;
         }
-        return potencia; 
+        //System.out.println("despues");
+       // System.out.println(b);
+        return b; 
     } 
     
     //calculo de la eleccion de camino tomando la formula dada, tambien ya aumenta la cantidad de fermonas de ese camino 
@@ -102,15 +116,23 @@ public class Hormigas {
         }
         int b = 0;
         for (int i = 0; i < resultados.length; i++) {
-            if(random < resultados[i] && random > resultados[i+1]){
-              b =i;
+            if(random < resultados[i] || random > resultados[i+1]){
+                b =i;
               break;
            } 
         }
         setCamino(lista.recorrer(b));
+        int d = getCiudadactual().getName();
         setCiudadactual(getCamino().getCiudadfinal());
         getCamino().aumentofermonas(getGlobal().getNumerohormigas());
-        getCamino().setFactorvaporacion(global.getFactordevaporicacion());
-        getCamino().evaporacion();
-    }  
+        Matriz mcambio = getMatriz();
+        mcambio.cambiarvaloresespecifico(0,getCiudadactual().getName(),d);
+        setMatriz(mcambio);
+        System.out.println(getCiudadactual().getName());
+    }
+    
+    public boolean finalizar(){
+      return getCiudadactual() == getCiudadfinal();  
+    }
+    
 }
