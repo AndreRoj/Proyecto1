@@ -46,7 +46,7 @@ public class Ventana6 extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        hormigas1 = new javax.swing.JTextField();
+        hormigas = new javax.swing.JTextField();
         panelRound2 = new Clases.PanelRound();
         jLabel5 = new javax.swing.JLabel();
         panelRound3 = new Clases.PanelRound();
@@ -123,6 +123,7 @@ public class Ventana6 extends javax.swing.JFrame {
         factorDeEvaporacion.setBackground(new java.awt.Color(137, 109, 137));
         factorDeEvaporacion.setForeground(new java.awt.Color(253, 253, 253));
         factorDeEvaporacion.setText("0.5");
+        factorDeEvaporacion.setBorder(null);
         factorDeEvaporacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 factorDeEvaporacionActionPerformed(evt);
@@ -133,6 +134,7 @@ public class Ventana6 extends javax.swing.JFrame {
         importanciaFeromona.setBackground(new java.awt.Color(137, 109, 137));
         importanciaFeromona.setForeground(new java.awt.Color(253, 253, 253));
         importanciaFeromona.setText("1");
+        importanciaFeromona.setBorder(null);
         importanciaFeromona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importanciaFeromonaActionPerformed(evt);
@@ -143,6 +145,7 @@ public class Ventana6 extends javax.swing.JFrame {
         gradoDeVisibilidad.setBackground(new java.awt.Color(137, 109, 137));
         gradoDeVisibilidad.setForeground(new java.awt.Color(253, 253, 253));
         gradoDeVisibilidad.setText("2");
+        gradoDeVisibilidad.setBorder(null);
         panelRound1.add(gradoDeVisibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 40, -1));
 
         jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
@@ -158,15 +161,16 @@ public class Ventana6 extends javax.swing.JFrame {
         jLabel10.setText("Ciudad Inicial");
         panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, -1));
 
-        hormigas1.setBackground(new java.awt.Color(137, 109, 137));
-        hormigas1.setForeground(new java.awt.Color(253, 253, 253));
-        hormigas1.setText("10");
-        hormigas1.addActionListener(new java.awt.event.ActionListener() {
+        hormigas.setBackground(new java.awt.Color(137, 109, 137));
+        hormigas.setForeground(new java.awt.Color(253, 253, 253));
+        hormigas.setText("10");
+        hormigas.setBorder(null);
+        hormigas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hormigas1ActionPerformed(evt);
+                hormigasActionPerformed(evt);
             }
         });
-        panelRound1.add(hormigas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 40, 20));
+        panelRound1.add(hormigas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 40, 20));
 
         panelRound2.setBackground(new java.awt.Color(253, 253, 253));
         panelRound2.setRoundBottomLeft(10);
@@ -174,7 +178,7 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound2.setRoundTopLeft(10);
         panelRound2.setRoundTopRight(10);
 
-        jLabel5.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(76, 60, 76));
         jLabel5.setText("Grado de Visibilidad");
 
@@ -202,7 +206,7 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound3.setRoundTopLeft(10);
         panelRound3.setRoundTopRight(10);
 
-        jLabel8.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(76, 60, 76));
         jLabel8.setText("Importancia de la Feromona");
 
@@ -230,7 +234,7 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound4.setRoundTopLeft(10);
         panelRound4.setRoundTopRight(10);
 
-        jLabel7.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(76, 60, 76));
         jLabel7.setText("Factor de evaporacion");
 
@@ -258,7 +262,7 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound5.setRoundTopLeft(10);
         panelRound5.setRoundTopRight(10);
 
-        jLabel11.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(76, 60, 76));
         jLabel11.setText("Numero de Hormigas");
 
@@ -286,7 +290,7 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound6.setRoundTopLeft(10);
         panelRound6.setRoundTopRight(10);
 
-        jLabel9.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(76, 60, 76));
         jLabel9.setText("Numero de Ciclos");
 
@@ -350,14 +354,16 @@ public class Ventana6 extends javax.swing.JFrame {
 
     private void iniciarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarGrafoActionPerformed
         try{
-            String h = ciclos.getText();
+            String h = hormigas.getText();
             String f = factorDeEvaporacion.getText();
             String i = importanciaFeromona.getText();
             String g = gradoDeVisibilidad.getText();
+            String c = ciclos.getText();
             float hormigas = Float.parseFloat(h);
             float factorDeEvaporacion = Float.parseFloat(f);
             float importanciaFeromona = Float.parseFloat(i);
             float gradoDeVisibilidad  = Float.parseFloat(i);
+            float ciclos  = Float.parseFloat(c);
             
             //Camino camino = new Camino(distancia,);
         } catch(Exception e){
@@ -398,9 +404,9 @@ public class Ventana6 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_importanciaFeromonaActionPerformed
 
-    private void hormigas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hormigas1ActionPerformed
+    private void hormigasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hormigasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hormigas1ActionPerformed
+    }//GEN-LAST:event_hormigasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,7 +450,7 @@ public class Ventana6 extends javax.swing.JFrame {
     private javax.swing.JTextField ciclos;
     private javax.swing.JTextField factorDeEvaporacion;
     private javax.swing.JTextField gradoDeVisibilidad;
-    private javax.swing.JTextField hormigas1;
+    private javax.swing.JTextField hormigas;
     private javax.swing.JTextField importanciaFeromona;
     private javax.swing.JButton iniciarGrafo;
     private javax.swing.JComboBox<String> jComboBox1;
