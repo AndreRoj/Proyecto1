@@ -4,6 +4,9 @@
  */
 package Interfaces;
 
+import Funciones.Global;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jose
@@ -15,6 +18,8 @@ public class Ventana4 extends javax.swing.JFrame {
      */
     public Ventana4() {
         initComponents();
+       
+        nuevaCiudad.setText(Integer.toString(Global.getListaciudades().getSize()));
     }
 
     /**
@@ -33,7 +38,7 @@ public class Ventana4 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        nuevaCiudad = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         distancia = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
@@ -68,6 +73,9 @@ public class Ventana4 extends javax.swing.JFrame {
         jLabel2.setText("Distancia");
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 190, -1));
 
+        jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
+        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(253, 253, 253));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(null);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,9 +90,9 @@ public class Ventana4 extends javax.swing.JFrame {
         jLabel3.setText("Ciudad a agregar:");
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel4.setText("jLabel4");
-        panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        nuevaCiudad.setForeground(new java.awt.Color(253, 253, 253));
+        nuevaCiudad.setText("jLabel4");
+        panelRound1.add(nuevaCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(253, 253, 253));
@@ -101,6 +109,9 @@ public class Ventana4 extends javax.swing.JFrame {
         });
         panelRound1.add(distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 50, -1));
 
+        guardar.setBackground(new java.awt.Color(137, 109, 137));
+        guardar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        guardar.setForeground(new java.awt.Color(253, 253, 253));
         guardar.setText("Guardar");
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +120,9 @@ public class Ventana4 extends javax.swing.JFrame {
         });
         panelRound1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 80, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,11 +176,17 @@ public class Ventana4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void distanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distanciaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_distanciaActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String d = distancia.getText();
+            float distancia = Float.parseFloat(d);
+            //Camino camino = new Camino(distancia,);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de tipo: " + e);
+        }
     }//GEN-LAST:event_guardarActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
@@ -219,13 +239,13 @@ public class Ventana4 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton menu;
+    private javax.swing.JLabel nuevaCiudad;
     private Clases.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }

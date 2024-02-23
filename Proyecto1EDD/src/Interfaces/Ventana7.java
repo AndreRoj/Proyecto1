@@ -60,6 +60,9 @@ public class Ventana7 extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
+        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(253, 253, 253));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(null);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +77,9 @@ public class Ventana7 extends javax.swing.JFrame {
         jLabel5.setText("Ciudades a conectar");
         panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, -1));
 
+        conectar.setBackground(new java.awt.Color(137, 109, 137));
+        conectar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        conectar.setForeground(new java.awt.Color(253, 253, 253));
         conectar.setText("Crear Camino");
         conectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +88,9 @@ public class Ventana7 extends javax.swing.JFrame {
         });
         panelRound1.add(conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 110, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +99,9 @@ public class Ventana7 extends javax.swing.JFrame {
         });
         panelRound1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 110, -1));
 
+        jComboBox2.setBackground(new java.awt.Color(137, 109, 137));
+        jComboBox2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(253, 253, 253));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.setBorder(null);
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {

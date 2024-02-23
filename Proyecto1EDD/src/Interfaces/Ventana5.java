@@ -59,6 +59,9 @@ public class Ventana5 extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
+        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(253, 253, 253));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBorder(null);
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +76,9 @@ public class Ventana5 extends javax.swing.JFrame {
         jLabel5.setText("Ciudad a eliminar");
         panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 190, -1));
 
+        eliminar.setBackground(new java.awt.Color(137, 109, 137));
+        eliminar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        eliminar.setForeground(new java.awt.Color(253, 253, 253));
         eliminar.setText("Eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +87,9 @@ public class Ventana5 extends javax.swing.JFrame {
         });
         panelRound1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 80, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

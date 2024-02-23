@@ -60,6 +60,9 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +82,12 @@ public class Ventana2 extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(10);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cargarArchivo.setBackground(new java.awt.Color(137, 109, 137));
+        cargarArchivo.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        cargarArchivo.setForeground(new java.awt.Color(253, 253, 253));
         cargarArchivo.setText("Buscar archivo");
+        cargarArchivo.setBorder(null);
+        cargarArchivo.setBorderPainted(false);
         cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargarArchivoActionPerformed(evt);
