@@ -7,7 +7,7 @@ public class Ciudad {
 
     private int name;   
     private int unidos;
-//cantidad total de ciudades que hay//
+    //cantidad total de ciudades que hay//
     private int ciudadmax;
     private int ciudadlimite;
 

@@ -10,16 +10,12 @@ public class Hormigas {
     private Ciudad ciudadfinal;
     private Camino camino;
     private Global global;
-    private Matriz matriz_feromonas;
-    private Matriz matriz;
 
     public Hormigas(Ciudad ciudadinicial, Ciudad ciudadfinal) {
         this.ciudadinicial = ciudadinicial;
         this.ciudadactual = ciudadinicial;
         this.ciudadfinal = ciudadfinal;
         this.camino = null;
-        this.matriz = global.getMatriz();
-        this.matriz_feromonas = global.getMatriz_feromonas();
     }
 
     public Ciudad getCiudadinicial() {
@@ -54,19 +50,22 @@ public class Hormigas {
         this.camino = camino;
     }
 
-    public Matriz getMatriz() {
-        return matriz;
+    public Global getGlobal() {
+        return global;
     }
 
-    public void setMatriz(Matriz matriz) {
-        this.matriz = matriz;
+    public void setGlobal(Global global) {
+        this.global = global;
     }
+
+    
     
     //sumatoria que se pide en el calculo de posibilidades de eleccion de camino
-    public int sumatoria(){
-        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
-        int a = 0;
-        int r = 1/getCiudadinicial().getCiudadmax();
+    public float sumatoria(){
+        float[] distancia = Global.getMatriz().buscar(getCiudadactual().getName());
+        float a = 0;
+        float r = (float)1/getCiudadinicial().getCiudadmax();
+        System.out.println(getCiudadinicial().getCiudadmax());
         for (int i = 0; i < distancia.length; i++) {
             float parte = this.potencia(r, global.getImporfermonas());
             float n = 1/distancia[i];
@@ -87,32 +86,31 @@ public class Hormigas {
         return potencia; 
     } 
     
-    //calculo de todos los caminos para ser elegidos guardados en un array 
+    //calculo de la eleccion de camino tomando la formula dada, tambien ya aumenta la cantidad de fermonas de ese camino 
     public void eleccioncamino(){
         double random = Math.random();
-        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
-        int a = this.sumatoria();
+        float[] distancia = Global.getMatriz().buscar(getCiudadactual().getName());
+        float a = this.sumatoria();
         float [] resultados = new float [distancia.length];
-        int r = 1/getCiudadinicial().getCiudadmax();
-        ListaCaminos lista = new ListaCaminos();
-        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
-            global.getListacaminos().recorrer(i).setCantidadfermona(r);
-            lista.buscarCiudadName(getCiudadactual().getName()); 
-        }
-        for (int i = 0; i < distancia.length; i++){
-            float parte = this.potencia(lista.recorrer(i).getCantidadfermona(), global.getImporfermonas());
-            float n = 1/distancia[i];
-            float parte2 = this.potencia(n, global.getVisibilidad());
-            float guardar = parte*parte2/a;
+        ListaCaminos lista = Global.getListacaminos().buscarCiudadName(getCiudadactual().getName());
+        for (int i = 0; i < lista.getSize(); i++){
+            float parte = this.potencia(lista.recorrer(i).getCantidadfermona(), getGlobal().getImporfermonas());
+            float n =(float) 1/distancia[i];
+            float parte2 = this.potencia(n, getGlobal().getVisibilidad());
+            float guardar = (float)parte*parte2/a;
             resultados[i] = guardar;
         }
-        for (int i = 0; i < distancia.length; i++) {
+        int b = 0;
+        for (int i = 0; i < resultados.length; i++) {
             if(random < resultados[i] && random > resultados[i+1]){
-                setCamino(lista.buscarDistancia(resultados[i]));
-                setCiudadactual(getCamino().getCiudadfinal());
-                break;
-            } 
+              b =i;
+              break;
+           } 
         }
-       
+        setCamino(lista.recorrer(b));
+        setCiudadactual(getCamino().getCiudadfinal());
+        getCamino().aumentofermonas(getGlobal().getNumerohormigas());
+        getCamino().setFactorvaporacion(global.getFactordevaporicacion());
+        getCamino().evaporacion();
     }  
 }

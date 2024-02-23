@@ -9,6 +9,7 @@ import org.graphstream.graph.implementations.SingleGraph;
 public class Grafo {
     
     public void addValuesToGrafo(){
+        System.setProperty("org.graphstream.ui", "swing");
         Matriz matriz = Global.getMatriz();
         Graph graph = new SingleGraph("tutorial1");
         for (int i = 0; i < Global.getMatriz().getMaximo(); i++) {
@@ -35,9 +36,11 @@ public class Grafo {
         }
         for (Node node : graph) {
         node.setAttribute("ui.label", node.getId());
-        //node.addAttribute("ui.size", 100);
+            if(node.getId().equals("2")){
+                //para cambiar los colores despues
+                node.setAttribute("ui.style", "size: 30px, 30px; fill-color: rgb(0,255,0);");
+            }
         }
         graph.display();
-        
     }
 }

@@ -82,36 +82,41 @@ public class ListaCaminos {
     public Camino recorrer(int numero){
         NodoCamino pointer = getHead(); 
         int a = 0;
-        if (numero >= getSize()){
-            System.out.println("valor incorrecto, ingresar nuevamente");
-            return null;
-        }else{
-        while(a<numero &&  pointer != null){
+        while(pointer.getNext() != null && a<numero ){
             pointer = pointer.getNext();
             a++;
         }
-        return pointer.getElement();
+        if(numero == 0){
+            return getHead().getElement();
+        }
+        if (numero == getSize()){
+           return pointer.getNext().getElement();
+        }else{
+            return pointer.getElement();
         }
     }   
-    
-    public void buscarCiudadName(int numero){
+    //verificar
+    public ListaCaminos buscarCiudadName(int numero){
         NodoCamino pointer = getHead();
+        ListaCaminos lista = new ListaCaminos();
         while (pointer != null){
-          if (pointer.getElement().getCiudadinicial().getName() == numero){
-            this.insertFinal(pointer.getElement());
-          }
+            if (pointer.getElement().getCiudadinicial().getName() == numero){
+                lista.insertFinal(pointer.getElement());
+            }
+            pointer = pointer.getNext();
         }
-    }   
- 
+        return lista;
+    } 
+    
     public Camino buscarDistancia (float numero){
         NodoCamino pointer = getHead();
         while (pointer != null){
             if (pointer.getElement().getDistancia() == numero){
-            return pointer.getElement();
+                return pointer.getElement();
             }
-        pointer = pointer.getNext();
+            pointer = pointer.getNext();
         }
-    return null;   
+        return null;   
     }
     
     public void print() {

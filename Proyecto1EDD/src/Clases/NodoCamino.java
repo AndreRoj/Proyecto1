@@ -5,10 +5,6 @@
  */
 package Clases;
 
-/**
- *
- * @author pjroj
- */
 public class NodoCamino {
     private Camino element;
     private NodoCamino next;

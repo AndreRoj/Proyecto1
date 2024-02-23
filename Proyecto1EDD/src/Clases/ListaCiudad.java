@@ -109,4 +109,12 @@ public class ListaCiudad {
     public boolean isEmpty() {
         return getHead() == null;
     }    
+    
+    public Ciudad definirCiudad(int element){
+        NodoCiudad pointer = getHead();
+        while(pointer.getElement().getName() != element){
+            pointer = pointer.getNext();
+        }
+        return pointer.getElement();
+    }
 }

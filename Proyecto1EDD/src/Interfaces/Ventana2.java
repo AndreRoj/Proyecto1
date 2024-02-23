@@ -150,17 +150,10 @@ public class Ventana2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cargarArchivoActionPerformed
     
-    private boolean FileIsEmpty(){
+    public boolean FileIsEmpty(){
         return Global.getFile() == null;
     }
     
-    private Ciudad definirCiudad(int element, ListaCiudad listaciudad){
-        NodoCiudad pointer = listaciudad.getHead();
-        while(pointer.getElement().getName() != element){
-            pointer = pointer.getNext();
-        }
-        return pointer.getElement();
-    }
     
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
         if (FileIsEmpty()){
@@ -200,8 +193,8 @@ public class Ventana2 extends javax.swing.JFrame {
                     // Dividir la línea por el separador y guardar los campos en un arreglo
                     String[] campos = linea.split(separador);
                     //Se usa la función para buscar el objeto ciudad en la lista para los campos del objeto Camino
-                    Ciudad c_inicial = definirCiudad(Integer.parseInt(campos[0]),listaciudad);
-                    Ciudad c_final = definirCiudad(Integer.parseInt(campos[1]),listaciudad);
+                    Ciudad c_inicial = listaciudad.definirCiudad(Integer.parseInt(campos[0]));
+                    Ciudad c_final = listaciudad.definirCiudad(Integer.parseInt(campos[1]));
                     //Crear un objeto Camino con los campos leídos
                     Camino camino = new Camino(c_inicial, c_final, Float.parseFloat(campos[2]));
                     // Agregar el objeto Camino a la lista de caminos
@@ -234,7 +227,7 @@ public class Ventana2 extends javax.swing.JFrame {
             
         } catch (Exception e) {
             // Mostrar por consola el mensaje de la excepción
-            JOptionPane.showMessageDialog(null,"Error al leer el archivo: "+e.getMessage()+"\nVerifique que no, haya espacios vacios, comas extra, etc");
+            JOptionPane.showMessageDialog(null,"Error al leer el archivo: "+e.getMessage()+"\nVerifique que no haya espacios vacios, comas extra, que los datos esten escritos correctamente como 'arista' o 'ciudad', etc");
         }
         }
         

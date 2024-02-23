@@ -67,7 +67,7 @@ public class Camino {
     }
     
     public void evaporacion(){
-        float t = 1-getFactorvaporacion(); 
+        float t =(float) 1-getFactorvaporacion(); 
         if(getCantidadfermona() ==0){   
             float r = 1/getCiudadinicial().getCiudadmax(); 
             setCantidadfermona(r*t);
@@ -77,9 +77,9 @@ public class Camino {
     } 
 
     public void aumentofermonas(int cantidadhormigas){
-        float t = 1/getDistancia() * cantidadhormigas; 
+        float t =(float) 1/getDistancia() * cantidadhormigas; 
         if(getCantidadfermona() ==0){   
-            float r = 1/getCiudadinicial().getCiudadmax(); 
+            float r = (float)1/getCiudadinicial().getCiudadmax(); 
             setCantidadfermona(r+t);
         }else{
             setCantidadfermona(getCantidadfermona()+t);   

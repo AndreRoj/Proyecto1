@@ -48,9 +48,11 @@ public class ListaHormigas {
     
     public void print() {
         NodoHormiga pointer = getHead();
+        int count = 1;
         while (pointer != null) {
-            System.out.println("[ "+pointer.getElement() + " ]");
+            System.out.println("Hormiga"+count+":[ inicio:"+ pointer.getElement().getCiudadinicial() +" ,actual:"+ pointer.getElement().getCiudadinicial()+" ,final:"+ pointer.getElement().getCiudadinicial()+" ]");
             pointer = pointer.getNext();
+            count++;
         }
     }
     public boolean isEmpty() {

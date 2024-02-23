@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import Clases.Ciudad;
+import Clases.ListaCiudad;
 import Funciones.Global;
 import Funciones.Grafo;
 import Funciones.Matriz;
@@ -174,15 +176,29 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarGrafoActionPerformed
-        
         Matriz matrix = new Matriz(Global.getListaciudades().getSize());
         Grafo grafo =  new Grafo();
         matrix.crearmatrix();
+        
         Global.setMatriz(matrix);
         Global.setMatriz_feromonas(matrix);
+        
+        //Matriz matriz_fer = matrix;
+        
         matrix.llenarmattriz();
-        Global.setMatriz(matrix);
+        //matriz_fer.feromonasIniciales();
+        //matrix.Show();
+        //Global.setMatriz(matrix);
+        System.out.println("matriz");
         Global.getMatriz().Show();
+        
+//        
+        ListaCiudad listaciudad = Global.getListaciudades();
+        Ciudad ciudadInicial = listaciudad.definirCiudad(1);
+        Ciudad ciudadFinal = listaciudad.definirCiudad(4);
+        Global global = new Global(10,10,ciudadInicial,ciudadFinal);
+        global.iniciarCiclo();
+//      
         grafo.addValuesToGrafo();
     }//GEN-LAST:event_iniciarGrafoActionPerformed
 
