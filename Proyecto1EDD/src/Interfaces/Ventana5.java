@@ -171,7 +171,6 @@ try{    // no puede contar con menos de 4 ciudades
         String ciudadEliminada2 = ciudadEliminada.toString();
         char numeroC = ciudadEliminada2.charAt(ciudadEliminada2.length() - 1);
         int numero = Character.getNumericValue(numeroC);
-        System.out.println("numero = " + numero);
         
         // se busca la ciudad a eliminar de la lista ciudades
         Ciudad ciudad = listaciudad.definirCiudad(numero);
@@ -188,8 +187,8 @@ try{    // no puede contar con menos de 4 ciudades
         Global.setListacaminos(listacaminos);
         
         
-        listaciudad.print();
-        listacaminos.print();
+        //listaciudad.print();
+        //listacaminos.print();
         
           
         }
