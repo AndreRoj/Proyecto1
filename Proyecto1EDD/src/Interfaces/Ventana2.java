@@ -60,6 +60,9 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +82,12 @@ public class Ventana2 extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(10);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cargarArchivo.setBackground(new java.awt.Color(137, 109, 137));
+        cargarArchivo.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
+        cargarArchivo.setForeground(new java.awt.Color(253, 253, 253));
         cargarArchivo.setText("Buscar archivo");
+        cargarArchivo.setBorder(null);
+        cargarArchivo.setBorderPainted(false);
         cargarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargarArchivoActionPerformed(evt);
@@ -214,28 +222,32 @@ public class Ventana2 extends javax.swing.JFrame {
             Global.setListacaminos(listacaminos);
             // Cerrar el objeto BufferedReader
             br.close();
-            System.out.println("CIUDADES");
-            Global.getListaciudades().print();
-            System.out.println("CAMINOS");
-            Global.getListacaminos().print();
-            //Cargar la siguiente ventana,Ventana3 la que posee las acciones del programa si cumple con que alla un mínimo de 4 ciudades o un máximo de
-            //20 ciudades
+            
+//            System.out.println("CIUDADES");
+            //Global.getListaciudades().print();
+//            System.out.println("CAMINOS");
+            //Global.getListacaminos().print();
+
+            //Cargar la siguiente ventana,Ventana3 la que posee las acciones del programa si cumple con que exitan un mínimo de 4 ciudades o un máximo de
+            //20 ciudades y que existan caminos para el recorrido
             if(Global.getListaciudades().getSize() > 20 || Global.getListaciudades().getSize() < 4){
                 if(Global.getListaciudades().getSize() > 20){
                     JOptionPane.showMessageDialog(null,"Solo se aceptan un máximo de 20 ciudades, por favor elimine un par de ciudades");
                 }else{
                     JOptionPane.showMessageDialog(null,"Se necesitan un mínimo de 4 ciudades para iniciar el programa, por favor agrege más ciudades");
                 }
+            }else if(Global.getListacaminos().getSize() == 0){
+                JOptionPane.showMessageDialog(null,"No se encontraron caminos registrados, se necesitan caminos entre ciudades para el funcionamiento correcto del programa, por favor agrege caminos");
             }else{
                 Ventana3 ventana3 = new Ventana3();
                 ventana3.setVisible(true);
                 this.dispose();
             }
             
-        } catch (Exception e) {
-            // Mostrar por consola el mensaje de la excepción
-            JOptionPane.showMessageDialog(null,"Error al leer el archivo: "+e.getMessage()+"\nVerifique que no, haya espacios vacios, comas extra, etc");
-        }
+            } catch (Exception e) {
+                // Mostrar por consola el mensaje de la excepción y una sugerencia general
+                JOptionPane.showMessageDialog(null,"Error al leer el archivo: "+e.getMessage()+"\nVerifique que no haya espacios vacios, comas extra o que los datos esten escritos como 'ciudad' y 'arista',  etc");
+            }
         }
         
     }//GEN-LAST:event_menuActionPerformed
@@ -265,6 +277,7 @@ public class Ventana2 extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ventana2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

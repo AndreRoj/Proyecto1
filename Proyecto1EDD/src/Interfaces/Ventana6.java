@@ -4,9 +4,18 @@
  */
 package Interfaces;
 
+import Clases.Ciudad;
+import Clases.ListaCaminos;
+import Clases.ListaCiudad;
+import Clases.NodoCamino;
 import Funciones.Global;
 import Funciones.Grafo;
 import Funciones.Matriz;
+import javax.swing.JOptionPane;
+import Clases.NodoCiudad;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 
 /**
  *
@@ -17,8 +26,17 @@ public class Ventana6 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana6
      */
+    ListaCiudad listaciudad = Global.getListaciudades();
+
     public Ventana6() {
         initComponents();
+        NodoCiudad aux = listaciudad.getHead();
+        while(aux != null){
+            String numero = Integer.toString(aux.getElement().getName());
+            ciudad1.addItem("Ciudad: "+numero);
+            ciudad2.addItem("Ciudad: "+numero);
+            aux = aux.getNext();
+        }
         
     }
 
@@ -35,16 +53,27 @@ public class Ventana6 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound1 = new Clases.PanelRound();
-        jLabel5 = new javax.swing.JLabel();
         iniciarGrafo = new javax.swing.JButton();
         menu = new javax.swing.JButton();
-        hormigas = new javax.swing.JTextField();
+        ciclos1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         factorDeEvaporacion = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        factorDeImportanciaFeromona = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        importanciaFeromona = new javax.swing.JTextField();
         gradoDeVisibilidad = new javax.swing.JTextField();
+        ciudad1 = new javax.swing.JComboBox<>();
+        ciudad2 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        hormigas = new javax.swing.JTextField();
+        panelRound2 = new Clases.PanelRound();
+        jLabel5 = new javax.swing.JLabel();
+        panelRound3 = new Clases.PanelRound();
+        jLabel8 = new javax.swing.JLabel();
+        panelRound4 = new Clases.PanelRound();
+        jLabel7 = new javax.swing.JLabel();
+        panelRound5 = new Clases.PanelRound();
+        jLabel11 = new javax.swing.JLabel();
+        panelRound6 = new Clases.PanelRound();
+        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -61,7 +90,7 @@ public class Ventana6 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(76, 60, 76));
         jLabel1.setText("Iniciar");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 190, 80));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, -10, 190, 80));
 
         panelRound1.setBackground(new java.awt.Color(76, 60, 76));
         panelRound1.setRoundBottomLeft(10);
@@ -70,70 +99,235 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel5.setText("Grado de Visibilidad");
-        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 210, -1));
-
+        iniciarGrafo.setBackground(new java.awt.Color(137, 109, 137));
+        iniciarGrafo.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        iniciarGrafo.setForeground(new java.awt.Color(253, 253, 253));
         iniciarGrafo.setText("Iniciar Grafo");
         iniciarGrafo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarGrafoActionPerformed(evt);
             }
         });
-        panelRound1.add(iniciarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 120, -1));
+        panelRound1.add(iniciarGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 100, 20));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuActionPerformed(evt);
             }
         });
-        panelRound1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 80, -1));
+        panelRound1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 70, 20));
 
-        hormigas.setText("10");
-        hormigas.addActionListener(new java.awt.event.ActionListener() {
+        ciclos1.setBackground(new java.awt.Color(137, 109, 137));
+        ciclos1.setForeground(new java.awt.Color(253, 253, 253));
+        ciclos1.setText("10");
+        ciclos1.setBorder(null);
+        ciclos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hormigasActionPerformed(evt);
+                ciclos1ActionPerformed(evt);
             }
         });
-        panelRound1.add(hormigas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 70, 30));
+        panelRound1.add(ciclos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 20));
 
-        jLabel6.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Agency FB", 0, 22)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel6.setText("Numero de Hormigas");
-        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 190, -1));
+        jLabel6.setText("Ciudad Final");
+        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 90, -1));
 
+        factorDeEvaporacion.setBackground(new java.awt.Color(137, 109, 137));
+        factorDeEvaporacion.setForeground(new java.awt.Color(253, 253, 253));
         factorDeEvaporacion.setText("0.5");
+        factorDeEvaporacion.setBorder(null);
         factorDeEvaporacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 factorDeEvaporacionActionPerformed(evt);
             }
         });
-        panelRound1.add(factorDeEvaporacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 70, -1));
+        panelRound1.add(factorDeEvaporacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 40, -1));
 
-        jLabel7.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel7.setText("Factor de evaporacion");
-        panelRound1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 190, -1));
-
-        factorDeImportanciaFeromona.setText("1");
-        factorDeImportanciaFeromona.addActionListener(new java.awt.event.ActionListener() {
+        importanciaFeromona.setBackground(new java.awt.Color(137, 109, 137));
+        importanciaFeromona.setForeground(new java.awt.Color(253, 253, 253));
+        importanciaFeromona.setText("1");
+        importanciaFeromona.setBorder(null);
+        importanciaFeromona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                factorDeImportanciaFeromonaActionPerformed(evt);
+                importanciaFeromonaActionPerformed(evt);
             }
         });
-        panelRound1.add(factorDeImportanciaFeromona, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, -1));
+        panelRound1.add(importanciaFeromona, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 40, -1));
 
-        jLabel8.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel8.setText("Importancia de la Feromona");
-        panelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 210, -1));
-
+        gradoDeVisibilidad.setBackground(new java.awt.Color(137, 109, 137));
+        gradoDeVisibilidad.setForeground(new java.awt.Color(253, 253, 253));
         gradoDeVisibilidad.setText("2");
-        panelRound1.add(gradoDeVisibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+        gradoDeVisibilidad.setBorder(null);
+        panelRound1.add(gradoDeVisibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 40, -1));
 
-        jPanel2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 420, 230));
+        ciudad1.setBackground(new java.awt.Color(137, 109, 137));
+        panelRound1.add(ciudad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 90, 30));
+
+        ciudad2.setBackground(new java.awt.Color(137, 109, 137));
+        panelRound1.add(ciudad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 90, 30));
+
+        jLabel10.setFont(new java.awt.Font("Agency FB", 0, 22)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(253, 253, 253));
+        jLabel10.setText("Ciudad Inicial");
+        panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, -1));
+
+        hormigas.setBackground(new java.awt.Color(137, 109, 137));
+        hormigas.setForeground(new java.awt.Color(253, 253, 253));
+        hormigas.setText("10");
+        hormigas.setBorder(null);
+        hormigas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hormigasActionPerformed(evt);
+            }
+        });
+        panelRound1.add(hormigas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 40, 20));
+
+        panelRound2.setBackground(new java.awt.Color(253, 253, 253));
+        panelRound2.setRoundBottomLeft(10);
+        panelRound2.setRoundBottomRight(10);
+        panelRound2.setRoundTopLeft(10);
+        panelRound2.setRoundTopRight(10);
+
+        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(76, 60, 76));
+        jLabel5.setText("Grado de Visibilidad");
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5))
+        );
+
+        panelRound1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 340, 20));
+
+        panelRound3.setBackground(new java.awt.Color(253, 253, 253));
+        panelRound3.setRoundBottomLeft(10);
+        panelRound3.setRoundBottomRight(10);
+        panelRound3.setRoundTopLeft(10);
+        panelRound3.setRoundTopRight(10);
+
+        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(76, 60, 76));
+        jLabel8.setText("Importancia de la Feromona");
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel8))
+        );
+
+        panelRound1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 340, 20));
+
+        panelRound4.setBackground(new java.awt.Color(253, 253, 253));
+        panelRound4.setRoundBottomLeft(10);
+        panelRound4.setRoundBottomRight(10);
+        panelRound4.setRoundTopLeft(10);
+        panelRound4.setRoundTopRight(10);
+
+        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(76, 60, 76));
+        jLabel7.setText("Factor de evaporacion");
+
+        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
+        panelRound4.setLayout(panelRound4Layout);
+        panelRound4Layout.setHorizontalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        panelRound4Layout.setVerticalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound4Layout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelRound1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 340, 20));
+
+        panelRound5.setBackground(new java.awt.Color(253, 253, 253));
+        panelRound5.setRoundBottomLeft(10);
+        panelRound5.setRoundBottomRight(10);
+        panelRound5.setRoundTopLeft(10);
+        panelRound5.setRoundTopRight(10);
+
+        jLabel11.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(76, 60, 76));
+        jLabel11.setText("Numero de Hormigas");
+
+        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
+        panelRound5.setLayout(panelRound5Layout);
+        panelRound5Layout.setHorizontalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        panelRound5Layout.setVerticalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelRound1.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 340, 20));
+
+        panelRound6.setBackground(new java.awt.Color(253, 253, 253));
+        panelRound6.setRoundBottomLeft(10);
+        panelRound6.setRoundBottomRight(10);
+        panelRound6.setRoundTopLeft(10);
+        panelRound6.setRoundTopRight(10);
+
+        jLabel9.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(76, 60, 76));
+        jLabel9.setText("Numero de Ciclos");
+
+        javax.swing.GroupLayout panelRound6Layout = new javax.swing.GroupLayout(panelRound6);
+        panelRound6.setLayout(panelRound6Layout);
+        panelRound6Layout.setHorizontalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        panelRound6Layout.setVerticalGroup(
+            panelRound6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound6Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel9))
+        );
+
+        panelRound1.add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 340, 20));
+
+        jPanel2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 420, 280));
 
         jPanel3.setBackground(new java.awt.Color(76, 60, 76));
         jPanel3.setForeground(new java.awt.Color(76, 60, 76));
@@ -149,7 +343,7 @@ public class Ventana6 extends javax.swing.JFrame {
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 50, 160, 10));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 160, 10));
 
         jPanel4.setBackground(new java.awt.Color(76, 60, 76));
         jPanel4.setForeground(new java.awt.Color(76, 60, 76));
@@ -165,7 +359,7 @@ public class Ventana6 extends javax.swing.JFrame {
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 170, -1));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 170, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
@@ -174,16 +368,99 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarGrafoActionPerformed
+        String ciudad11 = ciudad1.getSelectedItem().toString();
+        String ciudad22 = ciudad2.getSelectedItem().toString();
         
-        Matriz matrix = new Matriz(Global.getListaciudades().getSize());
-        Grafo grafo =  new Grafo();
-        matrix.crearmatrix();
-        Global.setMatriz(matrix);
-        Global.setMatriz_feromonas(matrix);
-        matrix.llenarmattriz();
-        Global.setMatriz(matrix);
-        Global.getMatriz().Show();
-        grafo.addValuesToGrafo();
+        
+        char ciudad111 = ciudad11.charAt(ciudad11.length() - 1);
+        char ciudad222 = ciudad22.charAt(ciudad22.length() - 1);
+        
+        int numero1F = Character.getNumericValue(ciudad111);
+        int numero2F = Character.getNumericValue(ciudad222);
+        
+        Ciudad ciudad1F = listaciudad.definirCiudad(numero1F);
+        Ciudad ciudad2F = listaciudad.definirCiudad(numero2F);
+        
+        int ciclos = Integer.parseInt(ciclos1.getText());
+        int nHormigas = Integer.parseInt(hormigas.getText());
+        float fde = Float.parseFloat(factorDeEvaporacion.getText());
+        int importanciaf = Integer.parseInt(importanciaFeromona.getText());
+        int gradoV = Integer.parseInt(gradoDeVisibilidad.getText());
+        
+        if(ciudad1F.getName() == ciudad2F.getName()){
+            JOptionPane.showMessageDialog(this, "No puedes conectar la misma ciudad!");
+        }
+        else if(nHormigas == 0) {
+            JOptionPane.showMessageDialog(this, "No puedes iniciar sin hormigas");
+        }
+        else if(fde <=0 || fde > 1){
+            JOptionPane.showMessageDialog(this, "Recuerda que el factor de evaporacion debe estar entre (0,1]");
+        }
+        else if(ciclos <= 0){
+            JOptionPane.showMessageDialog(this, "No puedes iniciar el programa sin ciclos");
+
+        }
+
+        
+        else{
+            try{
+            
+            //INICIAR EL PROGRAMA DE RECORRIDO
+            NodoCiudad aux = listaciudad.getHead();
+            while (aux.getNext() != null){
+                aux =aux.getNext();
+            }
+            int ultimaCiudad = aux.getElement().getName();
+                           
+            Matriz matrix = new Matriz(ultimaCiudad);
+            Matriz matrixferomonas = new Matriz(ultimaCiudad);
+            matrix.crearmatrix();
+            matrixferomonas.crearmatrix();
+            Matriz matrixcaminos = matrix.llenarmatriz(matrix);
+            Global.setMatriz(matrixcaminos);
+            Global.setMatriz_feromonas(matrixferomonas);
+            //matrix.Show();
+            //Se define la ciudad inicial y la ciudad final
+            // 5 cantidad de hormigas
+            //2 ciclos
+            
+            Global global = new Global(ciclos, nHormigas, ciudad1F, ciudad2F, gradoV, importanciaf, fde);
+            global.iniciarCiclo();
+            
+            //REESCRIBIR EL ARCHIVO DE TEXTO
+
+            String filePath = Global.getFile().getAbsolutePath();
+            ListaCiudad Lciudades = Global.getListaciudades();
+            ListaCaminos Lcaminos = Global.getListacaminos();
+            FileWriter clearFile = new FileWriter(filePath, false);
+            clearFile.write("");
+            clearFile.close();
+            FileWriter bw = new FileWriter(filePath, true); // El segundo parámetro indica si se sobrescribe el archivo
+            bw.write("ciudad");
+
+            NodoCiudad pointer = Lciudades.getHead();
+            while (pointer !=null){
+                bw.write("\n"+pointer.getElement().getName());
+                pointer = pointer.getNext();
+            }
+            bw.write("\narista");
+            NodoCamino pointer2 = Lcaminos.getHead();
+            while (pointer2 !=null){
+                int cInicio = pointer2.getElement().getCiudadinicial().getName();
+                int cFinal = pointer2.getElement().getCiudadfinal().getName();
+                float distancia = pointer2.getElement().getDistancia();
+                bw.write("\n"+cInicio+","+cFinal+","+distancia);
+                pointer2 = pointer2.getNext();
+            }
+            bw.close();
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de tipo:" + e);
+        }
+        }        
+        //ciudadInicial.addItem(item);
+        
+        
     }//GEN-LAST:event_iniciarGrafoActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
@@ -194,17 +471,21 @@ public class Ventana6 extends javax.swing.JFrame {
     
     }//GEN-LAST:event_menuActionPerformed
 
-    private void hormigasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hormigasActionPerformed
+    private void ciclos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclos1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hormigasActionPerformed
+    }//GEN-LAST:event_ciclos1ActionPerformed
 
     private void factorDeEvaporacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorDeEvaporacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_factorDeEvaporacionActionPerformed
 
-    private void factorDeImportanciaFeromonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorDeImportanciaFeromonaActionPerformed
+    private void importanciaFeromonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importanciaFeromonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_factorDeImportanciaFeromonaActionPerformed
+    }//GEN-LAST:event_importanciaFeromonaActionPerformed
+
+    private void hormigasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hormigasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hormigasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +516,10 @@ public class Ventana6 extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -243,23 +528,37 @@ public class Ventana6 extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ciclos1;
+    private javax.swing.JComboBox<String> ciudad1;
+    private javax.swing.JComboBox<String> ciudad2;
     private javax.swing.JTextField factorDeEvaporacion;
-    private javax.swing.JTextField factorDeImportanciaFeromona;
     private javax.swing.JTextField gradoDeVisibilidad;
     private javax.swing.JTextField hormigas;
+    private javax.swing.JTextField importanciaFeromona;
     private javax.swing.JButton iniciarGrafo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton menu;
     private Clases.PanelRound panelRound1;
+    private Clases.PanelRound panelRound2;
+    private Clases.PanelRound panelRound3;
+    private Clases.PanelRound panelRound4;
+    private Clases.PanelRound panelRound5;
+    private Clases.PanelRound panelRound6;
     // End of variables declaration//GEN-END:variables
 }

@@ -73,6 +73,9 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel2.setText("Hormigas GPS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 180, 50));
 
+        iniciar.setBackground(new java.awt.Color(137, 109, 137));
+        iniciar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        iniciar.setForeground(new java.awt.Color(253, 253, 253));
         iniciar.setText("Iniciar");
         iniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +84,9 @@ public class Ventana1 extends javax.swing.JFrame {
         });
         getContentPane().add(iniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 320, -1, -1));
 
+        salir.setBackground(new java.awt.Color(137, 109, 137));
+        salir.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        salir.setForeground(new java.awt.Color(253, 253, 253));
         salir.setText("Salir");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

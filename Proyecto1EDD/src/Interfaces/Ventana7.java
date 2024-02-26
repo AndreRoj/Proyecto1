@@ -4,17 +4,35 @@
  */
 package Interfaces;
 
+import Clases.Camino;
+import Clases.Ciudad;
+import Clases.ListaCiudad;
+import Clases.NodoCiudad;
+import Funciones.Global;
+import Clases.ListaCaminos;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Jose
  */
 public class Ventana7 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ventana6
-     */
+    ListaCiudad listaciudad = Global.getListaciudades();
+    ListaCaminos listacaminos = Global.getListacaminos();
+
     public Ventana7() {
         initComponents();
+        // llenado de los combo box
+        NodoCiudad aux = listaciudad.getHead();
+        while(aux != null){
+            String numero = Integer.toString(aux.getElement().getName());
+            ciudad1.addItem("Ciudad: "+numero);
+            ciudad2.addItem("Ciudad: "+numero);
+            aux = aux.getNext();
+        }
+        
     }
 
     /**
@@ -30,11 +48,13 @@ public class Ventana7 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound1 = new Clases.PanelRound();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ciudad2 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         conectar = new javax.swing.JButton();
         menu = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        ciudad1 = new javax.swing.JComboBox<>();
+        distancia = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -60,20 +80,25 @@ public class Ventana7 extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ciudad2.setBackground(new java.awt.Color(137, 109, 137));
+        ciudad2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        ciudad2.setForeground(new java.awt.Color(253, 253, 253));
+        ciudad2.setBorder(null);
+        ciudad2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ciudad2ActionPerformed(evt);
             }
         });
-        panelRound1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 120, 30));
+        panelRound1.add(ciudad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 120, 30));
 
-        jLabel5.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(253, 253, 253));
-        jLabel5.setText("Ciudades a conectar");
-        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, -1));
+        jLabel5.setText("Distancia");
+        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 60, 20));
 
+        conectar.setBackground(new java.awt.Color(137, 109, 137));
+        conectar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        conectar.setForeground(new java.awt.Color(253, 253, 253));
         conectar.setText("Crear Camino");
         conectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +107,9 @@ public class Ventana7 extends javax.swing.JFrame {
         });
         panelRound1.add(conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 110, -1));
 
+        menu.setBackground(new java.awt.Color(137, 109, 137));
+        menu.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        menu.setForeground(new java.awt.Color(253, 253, 253));
         menu.setText("Menu");
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,14 +118,32 @@ public class Ventana7 extends javax.swing.JFrame {
         });
         panelRound1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 110, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setBorder(null);
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        ciudad1.setBackground(new java.awt.Color(137, 109, 137));
+        ciudad1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        ciudad1.setForeground(new java.awt.Color(253, 253, 253));
+        ciudad1.setBorder(null);
+        ciudad1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                ciudad1ActionPerformed(evt);
             }
         });
-        panelRound1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 30));
+        panelRound1.add(ciudad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 30));
+
+        distancia.setBackground(new java.awt.Color(137, 109, 137));
+        distancia.setForeground(new java.awt.Color(253, 253, 253));
+        distancia.setText("0");
+        distancia.setBorder(null);
+        distancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                distanciaActionPerformed(evt);
+            }
+        });
+        panelRound1.add(distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 50, 20));
+
+        jLabel6.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(253, 253, 253));
+        jLabel6.setText("Ciudades a conectar");
+        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, -1));
 
         jPanel2.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 420, 230));
 
@@ -139,14 +185,45 @@ public class Ventana7 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ciudad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudad2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ciudad2ActionPerformed
 
     private void conectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_conectarActionPerformed
+        //Se obtienen las ciudades a conectar
+        String ciudad11 = ciudad1.getSelectedItem().toString();
+        String ciudad22 = ciudad2.getSelectedItem().toString();
+        
+        
+        char ciudad111 = ciudad11.charAt(ciudad11.length() - 1);
+        char ciudad222 = ciudad22.charAt(ciudad22.length() - 1);
+        
+        int numero1F = Character.getNumericValue(ciudad111);
+        int numero2F = Character.getNumericValue(ciudad222);
+        
+        Ciudad ciudad1F = listaciudad.definirCiudad(numero1F);
+        Ciudad ciudad2F = listaciudad.definirCiudad(numero2F);
+        // si la ciudad es la misma se le notifica al usuario que no es posible
+        if(ciudad1F.getName() == ciudad2F.getName()){
+            JOptionPane.showMessageDialog(this, "No puedes conectar la misma ciudad!");
+        }else{
+            // se crea el camino
+            int distancia = Integer.parseInt(this.distancia.getText());
+        
+            Camino camino = new Camino(ciudad1F, ciudad2F, distancia);
 
+            listacaminos.insertFinal(camino);
+            listacaminos.print();
+
+            Global.setListacaminos(listacaminos);
+        }
+        
+        
+       
+
+        
+    }//GEN-LAST:event_conectarActionPerformed
+    // cerrar ventana e ir al menu
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
 
         Ventana3 ventana3 = new Ventana3();
@@ -155,9 +232,13 @@ public class Ventana7 extends javax.swing.JFrame {
     
     }//GEN-LAST:event_menuActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void ciudad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudad1ActionPerformed
+        
+    }//GEN-LAST:event_ciudad1ActionPerformed
+
+    private void distanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distanciaActionPerformed
+
+    }//GEN-LAST:event_distanciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,21 +273,34 @@ public class Ventana7 extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Ventana7().setVisible(true);
+                
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ciudad1;
+    private javax.swing.JComboBox<String> ciudad2;
     private javax.swing.JButton conectar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JTextField distancia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

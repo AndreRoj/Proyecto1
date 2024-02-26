@@ -5,17 +5,15 @@
  */
 package Clases;
 
-/**
- *
- * @author pjroj
- */
 public class NodoCamino {
     private Camino element;
     private NodoCamino next;
+    private NodoCamino previous;
 
     public NodoCamino(Camino element) {
         this.element = element;
         this.next = null;
+        this.previous = null;
     }
 
     public Camino getElement() {
@@ -32,6 +30,14 @@ public class NodoCamino {
 
     public void setNext(NodoCamino next) {
         this.next = next;
+    }
+
+    public NodoCamino getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(NodoCamino previous) {
+        this.previous = previous;
     }
     
     

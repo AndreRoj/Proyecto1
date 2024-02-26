@@ -53,14 +53,14 @@ public class Matriz {
         setMatrix(new float [getMaximo()][getMaximo()]);
         for (int i = 0; i < getMaximo(); i++) {
             for (int j = 0; j < getMaximo(); j++) {
-             float llenador[][] = getMatrix();
-             llenador [i][j] = 0;
-             setMatrix(llenador);
+                 float llenador[][] = getMatrix();
+                 llenador [i][j] = 0;
+                 setMatrix(llenador);
             }
         }
        return getMatrix(); 
     }
- 
+    //visualizacion de la matriz
     public void print(){
         float matriz[][] = getMatrix();
         for (int i = 0; i < getMaximo(); i++) {
@@ -74,7 +74,7 @@ public class Matriz {
             }
         } 
     }
-
+    //Mejora del print de la matriz
     public void Show(){
         System.out.println("");
         for (int i = 0; i < getMaximo(); i++) {
@@ -84,7 +84,7 @@ public class Matriz {
             System.out.println("");
         }
     }
-    
+    // Añadir los elementos a la matriz
     public float[][] añadir(Matriz matriz){
         float copia[][] = new float [matriz.getMaximo()+1][matriz.getMaximo()+1];
         for (int i = 0; i < matriz.getMaximo() ; i++) {   
@@ -102,6 +102,7 @@ public class Matriz {
         return copia;
     }
 
+    //Eliminar elementos de la matriz fila/columna coloca valores 0 en las ciudades eliminadas
     public void eliminar(int numero){
         float borrar[][] = getMatrix();
         for (int i = 0; i < getMaximo(); i++) {
@@ -111,50 +112,51 @@ public class Matriz {
         setMaximo(getMaximo()-1);
     }
 
+    //Retorna un float array que contiene los valores pedidos por el programa.
     public float[] buscar(int columnas){
-        setBuscados(new float[getMaximo()]);
+        setBuscados(new float[getMaximo()+1]);
         for (int i = 0; i < getMaximo(); i++) {
-            getBuscados()[i] = getMatrix()[columnas][i];  
+            getBuscados()[i] = getMatrix()[columnas][i];
         }
         return getBuscados();
     }
 
-    public void cambiarvalorescolumna(int valor, int columna){
+    //Cambia los valores de la columna
+    public void cambiarvalorescolumna(float valor, int columna){
         for (int i = 0; i < getMaximo(); i++) {
-            getMatrix()[i][columna] = valor;   
+            getMatrix()[i][columna-1] = valor;   
         }  
     }
-
-
-    public void cambiarvaloresfilas(int valor, int filas){
+    
+     //Cambia los valores de la Fila
+    public void cambiarvaloresfilas(float valor, int filas){
         for (int i = 0; i < getMaximo(); i++) {
-            getMatrix()[filas][i] = valor;   
+            getMatrix()[filas-1][i] = valor;   
         }  
     }
-
+    
+    //se usa principalmente para cambiar un valor especifico en la matriz, tanto fila x columna como columna x fila
     public void cambiarvaloresespecifico(float valor, int columna, int fila){
         getMatrix()[fila-1][columna-1] = valor;   
         getMatrix()[columna-1][fila-1] = valor;   
     }
-
-    public void llenarmattriz(){
-        Matriz matriz = Global.getMatriz();
+    
+    //para definir las distancias de los caminos que luego será utilizado para la representación del grafo
+    public Matriz llenarmatriz(Matriz matriz){
+        //Matriz matriz = Global.getMatriz();
         for (int i = 0; i < Global.getListacaminos().getSize(); i++) {
             Camino camino = Global.getListacaminos().recorrer(i);
             matriz.cambiarvaloresespecifico(camino.getDistancia(), camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
         }
-        Global.setMatriz(matriz);
+        return matriz;
     }
     
-    //para definir las ferromanas iniciales de la matriz que luego será utilizado para el recorrido
+    //para definir las ferromanas de los caminos que luego será utilizado para el recorrido y busqueda del camino más corto
     public void feromonasIniciales(){
         Matriz matriz_f = Global.getMatriz_feromonas();
-        int cantidad_ciudades = Global.getListaciudades().getSize();
-        float cantidad_ciud_f = (float) cantidad_ciudades;
         for (int i = 0; i < Global.getListacaminos().getSize(); i++) {
             Camino camino = Global.getListacaminos().recorrer(i);
-            float feromona_inicial = 1/cantidad_ciud_f;
-            matriz_f.cambiarvaloresespecifico(feromona_inicial, camino.getCiudadfinal().getName(), camino.getCiudadinicial().getName());
+            matriz_f.cambiarvaloresespecifico(camino.getCantidadfermona(), camino.getCiudadinicial().getName(), camino.getCiudadfinal().getName());
         }
         Global.setMatriz_feromonas(matriz_f);
     }
