@@ -47,7 +47,6 @@ public class Ventana3 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 51, 153));
-        setPreferredSize(new java.awt.Dimension(490, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -265,43 +264,43 @@ public class Ventana3 extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+// abre la ventana para cambiar el archivo
     private void panelRound2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MousePressed
         cambiarVentana2();
     }//GEN-LAST:event_panelRound2MousePressed
-
+// abre la ventana para cambiar el archivo
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         cambiarVentana2();
     }//GEN-LAST:event_jLabel3MousePressed
-
+// abre la ventana para agregar ciudad
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         cambiarVentana4();
     }//GEN-LAST:event_jLabel4MousePressed
-
+// abre la ventana para agregar ciudad
     private void panelRound1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MousePressed
         cambiarVentana4();
     }//GEN-LAST:event_panelRound1MousePressed
-
+// abre la ventana para agregar camino
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         cambiarVentana7();
     }//GEN-LAST:event_jLabel2MousePressed
-
+// abre la ventana para agregar camino
     private void panelRound3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MousePressed
         cambiarVentana7();
     }//GEN-LAST:event_panelRound3MousePressed
-
+// abre la ventana para eliminar ciudad
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         cambiarVentana5();
     }//GEN-LAST:event_jLabel6MousePressed
-
+// abre la ventana para eliminar ciudad
     private void panelRound5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound5MousePressed
         cambiarVentana5();
     }//GEN-LAST:event_panelRound5MousePressed
-
+// abre la ventana para iniciar programa
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         cambiarVentana6();
     }//GEN-LAST:event_jLabel5MousePressed
-
+// abre la ventana para iniciar programa
     private void panelRound4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound4MousePressed
         cambiarVentana6();
     }//GEN-LAST:event_panelRound4MousePressed
@@ -331,6 +330,7 @@ public class Ventana3 extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Ventana3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

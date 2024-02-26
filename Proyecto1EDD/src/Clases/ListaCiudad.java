@@ -26,6 +26,7 @@ public class ListaCiudad {
         this.size = size;
     }
         
+    //insertar al final de la lista ciudad
     public void insertFinal(Ciudad element) {
         NodoCiudad nodo = new NodoCiudad(element);
         if (isEmpty()) {
@@ -40,7 +41,7 @@ public class ListaCiudad {
         size++;
     }
     
-    
+    // eliminar el primer elemento de la lista
     public Object deleteBegin(){
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
@@ -54,6 +55,26 @@ public class ListaCiudad {
         return null;
     }
     
+    //elimina la ciudad, recibe el nombre de la ciudad.
+    public void eliminarciudad(int numeroCiudad){
+        NodoCiudad aux = getHead();
+        if(aux.getElement().getName() == numeroCiudad){
+            deleteBegin();
+        }else{
+          while (aux.getNext().getElement().getName() != numeroCiudad){
+            aux = aux.getNext();
+            }
+          NodoCiudad aux2 = aux.getNext();
+          aux.setNext(aux2.getNext());
+          aux2.setNext(null);
+          
+        }
+        size --;
+        
+        
+    }
+    
+    //Eliminar el ultimo elemento de la lista
     public Object deleteFinal(){
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
@@ -69,35 +90,7 @@ public class ListaCiudad {
         return null;
     }
     
-    public Object deleteInIndex(int index) {
-        if (isEmpty()) {
-            System.out.println("La lista esta vacia");
-        } else {
-            if (index < 0) {
-                System.out.println("Index Error");
-            } else if (index >= size) {
-                System.out.println("Index Error");
-            } else if (index == 0) {
-                return deleteBegin();
-            } else if (index == size-1) {
-                return deleteFinal();
-            } else {
-                NodoCiudad pointer = getHead();
-                int aux = 0; 
-                while (pointer.getNext() != null && aux < index - 1) {
-                    pointer = pointer.getNext();
-                    aux++;
-                }
-                NodoCiudad pointer2 = pointer.getNext();
-                pointer.setNext(pointer2.getNext());
-                pointer2.setNext(null);
-                size--;
-                return pointer.getElement();
-            }
-        }
-        return null;
-    }
-    
+    // visualizacion de la lista.
     public void print() {
         NodoCiudad pointer = getHead();
         while (pointer != null) {
@@ -109,4 +102,14 @@ public class ListaCiudad {
     public boolean isEmpty() {
         return getHead() == null;
     }    
-}
+    // retorna el objeto ciudad segun su nombre.
+    public Ciudad definirCiudad(int element){
+        NodoCiudad pointer = getHead();
+        while(pointer.getElement().getName() != element){
+            pointer = pointer.getNext();
+        }
+         return pointer.getElement();
+    }
+ }
+
+    

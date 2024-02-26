@@ -3,6 +3,7 @@ package Clases;
 
 public class ListaCaminos {
     private NodoCamino head;
+    private NodoCamino tail;
     private int size;    
 
     public ListaCaminos() {
@@ -16,6 +17,14 @@ public class ListaCaminos {
 
     public void setHead(NodoCamino head) {
         this.head = head;
+    }
+
+    public NodoCamino getTail() {
+        return tail;
+    }
+
+    public void setTail(NodoCamino tail) {
+        this.tail = tail;
     }
 
     public int getSize() {
@@ -34,12 +43,11 @@ public class ListaCaminos {
         NodoCamino nodo = new NodoCamino(element);
         if (isEmpty()) {
             setHead(nodo);
+            setTail(nodo);
         } else {
-           NodoCamino pointer = getHead();
-           while (pointer.getNext() != null) {
-               pointer = pointer.getNext();
-           }
-           pointer.setNext(nodo);
+            getTail().setNext(nodo);
+            nodo.setPrevious(getTail());
+            setTail(nodo);
         }
         size++;
     }
@@ -48,70 +56,225 @@ public class ListaCaminos {
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
         } else {
-            NodoCamino pointer = getHead();
-            setHead(pointer.getNext());
-            pointer.setNext(null);
-            size--;
-            return -1;
+            if (getHead() == getTail()) {
+                setHead(null);
+                setTail(null);
+                size--;
+            } else {
+                NodoCamino pointer = getHead();
+                setHead(pointer.getNext());
+                getHead().setPrevious(null);
+                pointer.setNext(null);
+                size--;
+                return pointer;
+            }
         }
         return null;
     }
     
-   //Está función de usa en los deletes de la ListaCaminos, para asi borrar los caminos
-    public void deleteCamino(Ciudad ciudad){
+    public Object deleteFinal(){
+        if (isEmpty()) {
+            System.out.println("La lista esta vacia");
+        } else {
+            if (getTail() == getHead()) {
+                setHead(null);
+                setTail(null);
+                size--;
+            } else {
+                NodoCamino pointer = getTail();
+                setTail(pointer.getPrevious());
+                getTail().setNext(null);
+                pointer.setPrevious(null);
+                size--;
+                return pointer;
+            }
+        }
+        return null;
+    }
+    
+public void deleteCaminos(Ciudad ciudad){
+    if (isEmpty()) {
+            System.out.println("La lista esta vacia");
+        } else {
+        NodoCamino aux = getHead();
+        int eliminate = ciudad.getName();
+        while (aux!= null){
+            if(aux.getElement().getCiudadinicial().getName() == eliminate){
+                if(aux==getHead()){
+                    NodoCamino auxNuevaCabeza = aux.getNext();
+                    setHead(auxNuevaCabeza);
+                    auxNuevaCabeza.setPrevious(null);
+                    aux.setNext(null);
+                    deleteCaminos(ciudad);
+                    
+                }
+                if (aux.getNext() == null){
+                    aux = aux.getPrevious();
+                    NodoCamino auxdeleted = aux.getNext();
+                    aux.setNext(null);
+                    setTail(aux);
+                    
+                    auxdeleted.setPrevious(null);
+                    auxdeleted.setNext(null);
+                    deleteCaminos(ciudad);
+                }
+                else{
+                    aux = aux.getPrevious();
+                    NodoCamino auxb = aux.getNext();
+                    NodoCamino auxn = aux.getNext().getNext();
+                    
+                    aux.setNext(auxn);
+                    auxn.setPrevious(aux);
+                            
+                    auxb.setNext(null);
+                    auxb.setPrevious(null);
+                    
+                }
+            }
+            if(aux.getElement().getCiudadfinal().getName() == eliminate){
+                if(aux==getHead()){
+                    NodoCamino auxNuevaCabeza = aux.getNext();
+                    setHead(auxNuevaCabeza);
+                    auxNuevaCabeza.setPrevious(null);
+                    aux.setNext(null);
+                    deleteCaminos(ciudad);
+                }
+                if (aux.getNext() == null){
+                    aux = aux.getPrevious();
+                    NodoCamino auxdeleted = aux.getNext();
+                    aux.setNext(null);
+                    setTail(aux);
+                    
+                    auxdeleted.setPrevious(null);
+                    auxdeleted.setNext(null);
+                    deleteCaminos(ciudad);
+                }
+                else{
+                    aux = aux.getPrevious();
+                    NodoCamino auxb = aux.getNext();
+                    NodoCamino auxn = aux.getNext().getNext();
+                    
+                    aux.setNext(auxn);
+                    auxn.setPrevious(aux);
+                            
+                    auxb.setNext(null);
+                    auxb.setPrevious(null);
+                    
+                }
+            }
+            aux = aux.getNext();
+        }
+    }
+}  
+
+    
+    public void deleteCaminoEspecifico(Camino camino){
+        if (isEmpty()) {
+            System.out.println("La lista esta vacia");
+        } else {
+            NodoCamino pointer = getHead();
+            boolean encontrado = false;
+            if(camino == getHead().getElement()){
+                deleteBegin();
+                pointer = getHead();
+            }
+            if(camino == getTail().getElement()){
+                deleteFinal();
+                pointer = getTail();
+            }
+            while(pointer != null && encontrado == false){
+                if(pointer.getElement() == camino){
+                    NodoCamino temp = pointer.getPrevious();
+                    NodoCamino temp2 = pointer.getNext();
+                    temp.setNext(temp2);
+                    temp2.setPrevious(temp);
+                    pointer.setPrevious(null);
+                    pointer.setNext(null);
+                    size--;
+                    encontrado = true;
+                }else{
+                    pointer = pointer.getNext();
+                }
+            }
+        }
+    }
+    
+    public void eliminar20(Ciudad ciudad){
+        
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
         } else {
             NodoCamino pointer = getHead();
             int eliminate = ciudad.getName();
-            while(pointer.getNext() != null){
-                if(pointer.getElement().getCiudadinicial().getName() == eliminate || pointer.getElement().getCiudadfinal().getName() == eliminate){
-                    NodoCamino pointer2 = pointer.getNext();   
-                    if(pointer == getHead()){
-                        setHead(pointer2);
-                        pointer.setNext(null);
-                    }else{
-                        continue;
-                    }
-                    //faltan cosas
+            //boolean encontrado = false;
+            while(pointer != null){
+                if(eliminate == getHead().getElement().getCiudadinicial().getName() || eliminate == getHead().getElement().getCiudadfinal().getName()){
+                    deleteBegin();
+                    pointer = getHead();
+                }
+                
+                if(pointer.getElement().getCiudadinicial().getName() == eliminate || pointer.getElement().getCiudadfinal().getName() == eliminate ){
+                    NodoCamino temp = pointer.getPrevious();
+                    NodoCamino temp2 = pointer.getNext();
+                    temp.setNext(temp2);
+                    temp2.setPrevious(temp);
+                    pointer.setPrevious(null);
+                    pointer.setNext(null);
+                    size--;
+                }    
+                if(eliminate == getTail().getElement().getCiudadinicial().getName() || eliminate == getTail().getElement().getCiudadfinal().getName()){
+                    deleteFinal();
+                    pointer = getTail();
+                }
+                
+                else{
+                    pointer = pointer.getNext();
                 }
             }
-        }
     }
+    }
+     
   
     public Camino recorrer(int numero){
         NodoCamino pointer = getHead(); 
         int a = 0;
-        if (numero >= getSize()){
-            System.out.println("valor incorrecto, ingresar nuevamente");
-            return null;
-        }else{
-        while(a<numero &&  pointer != null){
+        while(pointer.getNext() != null && a<numero ){
             pointer = pointer.getNext();
             a++;
         }
-        return pointer.getElement();
+        if(numero == 0){
+            return getHead().getElement();
+        }
+        if (numero == getSize()){
+           return pointer.getNext().getElement();
+        }else{
+            return pointer.getElement();
         }
     }   
     
-    public void buscarCiudadName(int numero){
+    public ListaCaminos buscarCiudadName(int numero){
         NodoCamino pointer = getHead();
+        ListaCaminos lista = new ListaCaminos();
         while (pointer != null){
-          if (pointer.getElement().getCiudadinicial().getName() == numero){
-            this.insertFinal(pointer.getElement());
-          }
+            if (pointer.getElement().getCiudadinicial().getName() == numero || pointer.getElement().getCiudadfinal().getName() == numero){
+                lista.insertFinal(pointer.getElement());
+            }
+            pointer = pointer.getNext();
         }
-    }   
- 
+        
+        
+        return lista;
+    } 
+    
     public Camino buscarDistancia (float numero){
         NodoCamino pointer = getHead();
         while (pointer != null){
             if (pointer.getElement().getDistancia() == numero){
-            return pointer.getElement();
+                return pointer.getElement();
             }
-        pointer = pointer.getNext();
+            pointer = pointer.getNext();
         }
-    return null;   
+        return null;   
     }
     
     public void print() {

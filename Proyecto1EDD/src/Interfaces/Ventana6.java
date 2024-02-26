@@ -4,10 +4,18 @@
  */
 package Interfaces;
 
+import Clases.Ciudad;
+import Clases.ListaCaminos;
+import Clases.ListaCiudad;
+import Clases.NodoCamino;
 import Funciones.Global;
 import Funciones.Grafo;
 import Funciones.Matriz;
 import javax.swing.JOptionPane;
+import Clases.NodoCiudad;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 
 /**
  *
@@ -18,8 +26,17 @@ public class Ventana6 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana6
      */
+    ListaCiudad listaciudad = Global.getListaciudades();
+
     public Ventana6() {
         initComponents();
+        NodoCiudad aux = listaciudad.getHead();
+        while(aux != null){
+            String numero = Integer.toString(aux.getElement().getName());
+            ciudad1.addItem("Ciudad: "+numero);
+            ciudad2.addItem("Ciudad: "+numero);
+            aux = aux.getNext();
+        }
         
     }
 
@@ -38,13 +55,13 @@ public class Ventana6 extends javax.swing.JFrame {
         panelRound1 = new Clases.PanelRound();
         iniciarGrafo = new javax.swing.JButton();
         menu = new javax.swing.JButton();
-        ciclos = new javax.swing.JTextField();
+        ciclos1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         factorDeEvaporacion = new javax.swing.JTextField();
         importanciaFeromona = new javax.swing.JTextField();
         gradoDeVisibilidad = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        ciudad1 = new javax.swing.JComboBox<>();
+        ciudad2 = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         hormigas = new javax.swing.JTextField();
         panelRound2 = new Clases.PanelRound();
@@ -104,16 +121,16 @@ public class Ventana6 extends javax.swing.JFrame {
         });
         panelRound1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 70, 20));
 
-        ciclos.setBackground(new java.awt.Color(137, 109, 137));
-        ciclos.setForeground(new java.awt.Color(253, 253, 253));
-        ciclos.setText("10");
-        ciclos.setBorder(null);
-        ciclos.addActionListener(new java.awt.event.ActionListener() {
+        ciclos1.setBackground(new java.awt.Color(137, 109, 137));
+        ciclos1.setForeground(new java.awt.Color(253, 253, 253));
+        ciclos1.setText("10");
+        ciclos1.setBorder(null);
+        ciclos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ciclosActionPerformed(evt);
+                ciclos1ActionPerformed(evt);
             }
         });
-        panelRound1.add(ciclos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 20));
+        panelRound1.add(ciclos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 20));
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 0, 22)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(253, 253, 253));
@@ -148,13 +165,11 @@ public class Ventana6 extends javax.swing.JFrame {
         gradoDeVisibilidad.setBorder(null);
         panelRound1.add(gradoDeVisibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 40, -1));
 
-        jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelRound1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+        ciudad1.setBackground(new java.awt.Color(137, 109, 137));
+        panelRound1.add(ciudad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 90, 30));
 
-        jComboBox2.setBackground(new java.awt.Color(137, 109, 137));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelRound1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+        ciudad2.setBackground(new java.awt.Color(137, 109, 137));
+        panelRound1.add(ciudad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 90, 30));
 
         jLabel10.setFont(new java.awt.Font("Agency FB", 0, 22)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(253, 253, 253));
@@ -353,35 +368,99 @@ public class Ventana6 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarGrafoActionPerformed
-        try{
-            String h = hormigas.getText();
-            String f = factorDeEvaporacion.getText();
-            String i = importanciaFeromona.getText();
-            String g = gradoDeVisibilidad.getText();
-            String c = ciclos.getText();
-            float hormigas = Float.parseFloat(h);
-            float factorDeEvaporacion = Float.parseFloat(f);
-            float importanciaFeromona = Float.parseFloat(i);
-            float gradoDeVisibilidad  = Float.parseFloat(i);
-            float ciclos  = Float.parseFloat(c);
-            
-            //Camino camino = new Camino(distancia,);
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos de tipo: " + e);
+        String ciudad11 = ciudad1.getSelectedItem().toString();
+        String ciudad22 = ciudad2.getSelectedItem().toString();
+        
+        
+        char ciudad111 = ciudad11.charAt(ciudad11.length() - 1);
+        char ciudad222 = ciudad22.charAt(ciudad22.length() - 1);
+        
+        int numero1F = Character.getNumericValue(ciudad111);
+        int numero2F = Character.getNumericValue(ciudad222);
+        
+        Ciudad ciudad1F = listaciudad.definirCiudad(numero1F);
+        Ciudad ciudad2F = listaciudad.definirCiudad(numero2F);
+        
+        int ciclos = Integer.parseInt(ciclos1.getText());
+        int nHormigas = Integer.parseInt(hormigas.getText());
+        float fde = Float.parseFloat(factorDeEvaporacion.getText());
+        int importanciaf = Integer.parseInt(importanciaFeromona.getText());
+        int gradoV = Integer.parseInt(gradoDeVisibilidad.getText());
+        
+        if(ciudad1F.getName() == ciudad2F.getName()){
+            JOptionPane.showMessageDialog(this, "No puedes conectar la misma ciudad!");
         }
+        else if(nHormigas == 0) {
+            JOptionPane.showMessageDialog(this, "No puedes iniciar sin hormigas");
+        }
+        else if(fde <=0 || fde > 1){
+            JOptionPane.showMessageDialog(this, "Recuerda que el factor de evaporacion debe estar entre (0,1]");
+        }
+        else if(ciclos <= 0){
+            JOptionPane.showMessageDialog(this, "No puedes iniciar el programa sin ciclos");
+
+        }
+
+        
+        else{
+            try{
+            
+            //INICIAR EL PROGRAMA DE RECORRIDO
+            NodoCiudad aux = listaciudad.getHead();
+            while (aux.getNext() != null){
+                aux =aux.getNext();
+            }
+            int ultimaCiudad = aux.getElement().getName();
+                           
+            Matriz matrix = new Matriz(ultimaCiudad);
+            Matriz matrixferomonas = new Matriz(ultimaCiudad);
+            matrix.crearmatrix();
+            matrixferomonas.crearmatrix();
+            Matriz matrixcaminos = matrix.llenarmatriz(matrix);
+            Global.setMatriz(matrixcaminos);
+            Global.setMatriz_feromonas(matrixferomonas);
+            //matrix.Show();
+            //Se define la ciudad inicial y la ciudad final
+            // 5 cantidad de hormigas
+            //2 ciclos
+            
+            Global global = new Global(ciclos, nHormigas, ciudad1F, ciudad2F, gradoV, importanciaf, fde);
+            global.iniciarCiclo();
+            
+            //REESCRIBIR EL ARCHIVO DE TEXTO
+
+            String filePath = Global.getFile().getAbsolutePath();
+            ListaCiudad Lciudades = Global.getListaciudades();
+            ListaCaminos Lcaminos = Global.getListacaminos();
+            FileWriter clearFile = new FileWriter(filePath, false);
+            clearFile.write("");
+            clearFile.close();
+            FileWriter bw = new FileWriter(filePath, true); // El segundo parámetro indica si se sobrescribe el archivo
+            bw.write("ciudad");
+
+            NodoCiudad pointer = Lciudades.getHead();
+            while (pointer !=null){
+                bw.write("\n"+pointer.getElement().getName());
+                pointer = pointer.getNext();
+            }
+            bw.write("\narista");
+            NodoCamino pointer2 = Lcaminos.getHead();
+            while (pointer2 !=null){
+                int cInicio = pointer2.getElement().getCiudadinicial().getName();
+                int cFinal = pointer2.getElement().getCiudadfinal().getName();
+                float distancia = pointer2.getElement().getDistancia();
+                bw.write("\n"+cInicio+","+cFinal+","+distancia);
+                pointer2 = pointer2.getNext();
+            }
+            bw.close();
+
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de tipo:" + e);
+        }
+        }        
+        //ciudadInicial.addItem(item);
         
         
-
-
-        Matriz matrix = new Matriz(Global.getListaciudades().getSize());
-        Grafo grafo =  new Grafo();
-        matrix.crearmatrix();
-        Global.setMatriz(matrix);
-        Global.setMatriz_feromonas(matrix);
-        matrix.llenarmattriz();
-        Global.setMatriz(matrix);
-        Global.getMatriz().Show();
-        grafo.addValuesToGrafo();
     }//GEN-LAST:event_iniciarGrafoActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
@@ -392,9 +471,9 @@ public class Ventana6 extends javax.swing.JFrame {
     
     }//GEN-LAST:event_menuActionPerformed
 
-    private void ciclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclosActionPerformed
+    private void ciclos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciclos1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ciclosActionPerformed
+    }//GEN-LAST:event_ciclos1ActionPerformed
 
     private void factorDeEvaporacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorDeEvaporacionActionPerformed
         // TODO add your handling code here:
@@ -437,6 +516,10 @@ public class Ventana6 extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -445,16 +528,19 @@ public class Ventana6 extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ciclos;
+    private javax.swing.JTextField ciclos1;
+    private javax.swing.JComboBox<String> ciudad1;
+    private javax.swing.JComboBox<String> ciudad2;
     private javax.swing.JTextField factorDeEvaporacion;
     private javax.swing.JTextField gradoDeVisibilidad;
     private javax.swing.JTextField hormigas;
     private javax.swing.JTextField importanciaFeromona;
     private javax.swing.JButton iniciarGrafo;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

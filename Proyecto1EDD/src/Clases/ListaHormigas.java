@@ -35,6 +35,7 @@ public class ListaHormigas {
         setHead(null);
     }
     
+    //Insertar una nueva hormiga en la primera posicion.
     public void insertBegin(Hormigas element) {
         NodoHormiga nodo = new NodoHormiga(element);
         if (isEmpty()) {
@@ -46,15 +47,38 @@ public class ListaHormigas {
         size++;
     }
     
+    //visualizacion de la hormiga
     public void print() {
         NodoHormiga pointer = getHead();
+        int count = 1;
         while (pointer != null) {
-            System.out.println("[ "+pointer.getElement() + " ]");
+            System.out.println("Hormiga"+count+":[ inicio:"+ pointer.getElement().getCiudadinicial().getName() +" ,actual:"+ pointer.getElement().getCiudadactual().getName()+" ,final:"+ pointer.getElement().getCiudadfinal().getName()+" ]");
             pointer = pointer.getNext();
+            count++;
         }
     }
     public boolean isEmpty() {
         return getHead() == null;
     }
+    
+    
+    
+    //bucar elemento con base a la cantidad de repeticiones hechas para encotrarlo.
+    public Hormigas recorrer(int numero){
+        NodoHormiga pointer = getHead(); 
+        int a = 0;
+        while(pointer.getNext() != null && a<numero ){
+            pointer = pointer.getNext();
+            a++;
+        }
+        if(numero == 0){
+            return getHead().getElement();
+        }
+        if (numero == getSize()){
+           return pointer.getNext().getElement();
+        }else{
+            return pointer.getElement();
+        }
+    }   
     
 }

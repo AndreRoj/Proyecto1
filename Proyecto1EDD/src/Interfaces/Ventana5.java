@@ -4,6 +4,14 @@
  */
 package Interfaces;
 
+import Clases.Ciudad;
+import Clases.ListaCaminos;
+import Clases.ListaCiudad;
+import Funciones.Global;
+import Clases.NodoCiudad;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Jose
@@ -13,8 +21,19 @@ public class Ventana5 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana4
      */
+    
+    ListaCiudad listaciudad = Global.getListaciudades();
+    ListaCaminos listacaminos = Global.getListacaminos();
     public Ventana5() {
         initComponents();
+        setResizable(false);
+        NodoCiudad aux = listaciudad.getHead();
+        // llenado de combo box
+        while(aux != null){
+            String numero = Integer.toString(aux.getElement().getName());
+            ciudadEliminar.addItem("Ciudad: "+numero);
+            aux = aux.getNext();
+        }
     }
 
     /**
@@ -30,7 +49,7 @@ public class Ventana5 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelRound1 = new Clases.PanelRound();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ciudadEliminar = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         eliminar = new javax.swing.JButton();
         menu = new javax.swing.JButton();
@@ -59,17 +78,16 @@ public class Ventana5 extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(10);
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setBackground(new java.awt.Color(137, 109, 137));
-        jComboBox1.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(253, 253, 253));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ciudadEliminar.setBackground(new java.awt.Color(137, 109, 137));
+        ciudadEliminar.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        ciudadEliminar.setForeground(new java.awt.Color(253, 253, 253));
+        ciudadEliminar.setBorder(null);
+        ciudadEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ciudadEliminarActionPerformed(evt);
             }
         });
-        panelRound1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, 30));
+        panelRound1.add(ciudadEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 50, 90, 30));
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(253, 253, 253));
@@ -138,14 +156,45 @@ public class Ventana5 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ciudadEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadEliminarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ciudadEliminarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminarActionPerformed
+try{    // no puede contar con menos de 4 ciudades 
+        if(ciudadEliminar.getItemCount() == 4){
+            JOptionPane.showMessageDialog(this, "No puedes tener menos de 4 ciudades");
+        }else{
+            // se selecciona la ciudad a eliminar del combo box
+          Object ciudadEliminada = ciudadEliminar.getSelectedItem();
+        ciudadEliminar.removeItem(ciudadEliminada);        
+        String ciudadEliminada2 = ciudadEliminada.toString();
+        char numeroC = ciudadEliminada2.charAt(ciudadEliminada2.length() - 1);
+        int numero = Character.getNumericValue(numeroC);
+        
+        
+        // se busca la ciudad a eliminar de la lista ciudades
+        Ciudad ciudad = listaciudad.definirCiudad(numero);
+        // se borra la ciudad y los caminos que llevan a ella
+        listacaminos.deleteCaminos(ciudad);
+        listaciudad.eliminarciudad(numero);
+        
+        
+        Global.setListaciudades(listaciudad);
+        Global.setListacaminos(listacaminos);
+        
+        
+        //listaciudad.print();
+        //listacaminos.print();
+        
+          
+        }
+        
+      } catch(Exception e)
+      {//{OptionPane.showMessageDialog(this, "Error, ya se eliminaron todas las ciudades" +e);
+      }    }//GEN-LAST:event_eliminarActionPerformed
 
+    // se cierra la ventana y lleva al usuario al menu
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
 
         Ventana3 ventana3 = new Ventana3();
@@ -181,6 +230,8 @@ public class Ventana5 extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -191,8 +242,8 @@ public class Ventana5 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ciudadEliminar;
     private javax.swing.JButton eliminar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

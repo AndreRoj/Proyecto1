@@ -8,18 +8,23 @@ public class Hormigas {
     private Ciudad ciudadinicial;
     private Ciudad ciudadactual;
     private Ciudad ciudadfinal;
-    private Camino camino;
-    private Global global;
-    private Matriz matriz_feromonas;
+    private boolean prueba;
+    private int intento;
     private Matriz matriz;
+    private Camino camino;
+    private Camino caminoanterior;
+    private Global global;
 
-    public Hormigas(Ciudad ciudadinicial, Ciudad ciudadfinal) {
+    public Hormigas(Ciudad ciudadinicial, Ciudad ciudadfinal, Matriz matriz) {
         this.ciudadinicial = ciudadinicial;
         this.ciudadactual = ciudadinicial;
         this.ciudadfinal = ciudadfinal;
         this.camino = null;
-        this.matriz = global.getMatriz();
-        this.matriz_feromonas = global.getMatriz_feromonas();
+        this.global = global;
+        this.matriz = matriz;
+        this.prueba = true;
+        this.intento = 0;
+        this.caminoanterior = camino;
     }
 
     public Ciudad getCiudadinicial() {
@@ -54,6 +59,14 @@ public class Hormigas {
         this.camino = camino;
     }
 
+    public Global getGlobal() {
+        return global;
+    }
+
+    public void setGlobal(Global global) {
+        this.global = global;
+    }
+
     public Matriz getMatriz() {
         return matriz;
     }
@@ -61,17 +74,45 @@ public class Hormigas {
     public void setMatriz(Matriz matriz) {
         this.matriz = matriz;
     }
+
+    public boolean isPrueba() {
+        return prueba;
+    }
+
+    public void setPrueba(boolean prueba) {
+        this.prueba = prueba;
+    }
+
+    public int getIntento() {
+        return intento;
+    }
+
+    public void setIntento(int intento) {
+        this.intento = intento;
+    }
+
+    public Camino getCaminoanterior() {
+        return caminoanterior;
+    }
+
+    public void setCaminoanterior(Camino caminoanterior) {
+        this.caminoanterior = caminoanterior;
+    }
     
     //sumatoria que se pide en el calculo de posibilidades de eleccion de camino
-    public int sumatoria(){
-        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
-        int a = 0;
-        int r = 1/getCiudadinicial().getCiudadmax();
+    public float sumatoria(){
+        float[] distancia = getMatriz().buscar(getCiudadactual().getName()-1);
+        float a = 0;
+        float r = (float)1/(Global.getListaciudades().getSize());
         for (int i = 0; i < distancia.length; i++) {
-            float parte = this.potencia(r, global.getImporfermonas());
-            float n = 1/distancia[i];
-            float parte2 = this.potencia(n, global.getVisibilidad());
-            a += parte*parte2;
+            if(distancia[i] == 0){
+                a+=0;
+            }else{
+                float parte = potencia(r, getGlobal().getImporfermonas());
+                float n = (float) 1/distancia[i];
+                float parte2 = potencia(n, getGlobal().getVisibilidad());
+                a += parte*parte2;
+            }
         }
         return a;  
     }
@@ -79,40 +120,127 @@ public class Hormigas {
     //metodo para elevar, no podemos usar Math pow, por eso se creo
     public float potencia(float numero, int elevado){
         int a = 1;
-        float potencia = numero;
+        float b = numero;
         while(a<elevado){
-            potencia *= numero;   
+            b *= numero;   
             a++;
         }
-        return potencia; 
+        return b; 
     } 
     
-    //calculo de todos los caminos para ser elegidos guardados en un array 
+    //calculo de la eleccion de camino tomando la formula dada, tambien ya aumenta la cantidad de fermonas de ese camino 
     public void eleccioncamino(){
+        int d = getCiudadactual().getName();
         double random = Math.random();
-        float[] distancia = getMatriz().buscar(getCiudadactual().getName());
-        int a = this.sumatoria();
-        float [] resultados = new float [distancia.length];
-        int r = 1/getCiudadinicial().getCiudadmax();
-        ListaCaminos lista = new ListaCaminos();
-        for (int i = 0; i < global.getListacaminos().getSize(); i++) {
-            global.getListacaminos().recorrer(i).setCantidadfermona(r);
-            lista.buscarCiudadName(getCiudadactual().getName()); 
-        }
-        for (int i = 0; i < distancia.length; i++){
-            float parte = this.potencia(lista.recorrer(i).getCantidadfermona(), global.getImporfermonas());
-            float n = 1/distancia[i];
-            float parte2 = this.potencia(n, global.getVisibilidad());
-            float guardar = parte*parte2/a;
-            resultados[i] = guardar;
-        }
-        for (int i = 0; i < distancia.length; i++) {
-            if(random < resultados[i] && random > resultados[i+1]){
-                setCamino(lista.buscarDistancia(resultados[i]));
-                setCiudadactual(getCamino().getCiudadfinal());
+        float[] distancia = getMatriz().buscar(getCiudadactual().getName()-1);
+        float a = this.sumatoria();
+        ListaCaminos lista = global.getListacaminos().buscarCiudadName(getCiudadactual().getName());
+        NodoCamino pointer = lista.getHead();
+        while(pointer != null){
+            float value = getMatriz().getMatrix()[(pointer.getElement().getCiudadinicial().getName())-1][(pointer.getElement().getCiudadfinal().getName())-1];
+            float value2 = getMatriz().getMatrix() [pointer.getElement().getCiudadfinal().getName()-1][pointer.getElement().getCiudadinicial().getName()-1];
+            if(lista.getSize() != 1){
+                if(value == (float)0 || value2 == (float)0){
+                    lista.deleteCaminoEspecifico(pointer.getElement());
+                    pointer = lista.getHead();
+                }else{
+                    pointer = pointer.getNext();
+                }
+            }else{
+                setPrueba(true);
                 break;
-            } 
+            }
         }
-       
-    }  
+        while(pointer != null){
+            if(lista.getSize() != 1){
+                if(pointer.getElement().getCiudadfinal().getName() == d){
+                   lista.deleteCaminoEspecifico(pointer.getElement());
+                   pointer = lista.getHead();
+                }else{
+                    pointer = pointer.getNext();
+                }
+            }else{
+               break;       
+            }
+        }
+        float [] resultados = new float [lista.getSize()];
+        for (int i = 0; i < lista.getSize(); i++){
+            if(distancia[i]!= 0){
+            float parte = this.potencia(lista.recorrer(i).getCantidadfermona(), getGlobal().getImporfermonas());
+            float n =(float) 1/distancia[i];
+            float parte2 = this.potencia(n, getGlobal().getVisibilidad());
+            float guardar = (float)parte*parte2/a;
+            resultados[i] = guardar;
+            }
+          }
+        int b = 0;
+        int c = 0; 
+        for (int i = 0; i < resultados.length; i++) {
+            if(random < resultados[i]){
+                b =i;
+                break;
+                }
+             if(i == resultados.length-1 && resultados.length > 2){
+                c++;
+                random = Math.random();
+                i = 0;
+             }
+             if(resultados.length == 2 && i == resultados.length -1){
+                if(resultados[0] > resultados[1]){
+                   b= 0;
+                   break;
+                }else{
+                  b = 1;
+                  break;
+                }
+             }
+             if(resultados.length == 1 ){
+                 b = 0;
+                 break;
+             }
+             if(c>2){
+                if(resultados[0] > resultados[1]){
+                  b= 0;
+                  break;
+                }else{
+                 b = 1;
+                 break;
+                }  
+            }
+        }
+        Camino caminocorrecto = lista.recorrer(b);
+        setCamino(caminocorrecto);
+        if(caminocorrecto.getCiudadfinal() == getCiudadactual()){
+          setCiudadactual(caminocorrecto.getCiudadinicial());
+        }else{   
+        setCiudadactual(caminocorrecto.getCiudadfinal());
+        }
+            if(getCiudadactual().getName()== d){
+              setIntento(1);
+            }
+        int f = getCiudadactual().getName();
+        getCamino().aumentofermonas(getGlobal().getNumerohormigas());
+        Matriz m = getMatriz();
+        m.cambiarvaloresespecifico(0,f,d);
+        setMatriz(m);
+        float e = Global.getMatrizoptimizacion().getMatrix()[f-1][d-1];
+        Matriz matrizoptimizacion = Global.getMatrizoptimizacion();
+        matrizoptimizacion.cambiarvaloresespecifico(e+1, f, d);
+        Global.setMatrizoptimizacion(matrizoptimizacion);
+     }
+    //revision de ciudades para confirmar si se llega al destino
+    public boolean finalizar(){
+        return getCiudadactual() == getCiudadfinal();  
+    }
+    
+    
+    //Comprobacion de repeticion de camino
+    public boolean ciega(){ 
+        if(getIntento() == 1){
+            return false;   
+        }else{
+            return true; 
+        }
+    }
+    
 }

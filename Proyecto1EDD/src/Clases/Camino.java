@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Clases;
-
+import Funciones.Global;
 /**
  *
  * @author pjroj
@@ -66,20 +66,21 @@ public class Camino {
         this.factorvaporacion = factorvaporacion;
     }
     
+       //calculo de la evaporacion de cada camino al final de cada ciclo.
     public void evaporacion(){
-        float t = 1-getFactorvaporacion(); 
+        float t =(float) 1-getFactorvaporacion(); 
         if(getCantidadfermona() ==0){   
-            float r = 1/getCiudadinicial().getCiudadmax(); 
+            float r = 1/(Global.getListaciudades().getSize()); 
             setCantidadfermona(r*t);
         }else{
             setCantidadfermona(getCantidadfermona()*t);   
         }
     } 
-
+// aumento de fermonas que pasa cada vez que una hormiga pasa por un camino.
     public void aumentofermonas(int cantidadhormigas){
-        float t = 1/getDistancia() * cantidadhormigas; 
+        float t =(float) 1/getDistancia() * cantidadhormigas; 
         if(getCantidadfermona() ==0){   
-            float r = 1/getCiudadinicial().getCiudadmax(); 
+            float r = (float)1/(Global.getListaciudades().getSize()); 
             setCantidadfermona(r+t);
         }else{
             setCantidadfermona(getCantidadfermona()+t);   
