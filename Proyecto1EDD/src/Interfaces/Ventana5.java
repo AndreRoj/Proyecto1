@@ -166,32 +166,36 @@ try{    // no puede contar con menos de 4 ciudades
             JOptionPane.showMessageDialog(this, "No puedes tener menos de 4 ciudades");
         }else{
             // se selecciona la ciudad a eliminar del combo box
-          Object ciudadEliminada = ciudadEliminar.getSelectedItem();
+        Object ciudadEliminada = ciudadEliminar.getSelectedItem();
         ciudadEliminar.removeItem(ciudadEliminada);        
         String ciudadEliminada2 = ciudadEliminada.toString();
         char numeroC = ciudadEliminada2.charAt(ciudadEliminada2.length() - 1);
         int numero = Character.getNumericValue(numeroC);
-        
+        System.out.println("numero = " + numero);
         
         // se busca la ciudad a eliminar de la lista ciudades
         Ciudad ciudad = listaciudad.definirCiudad(numero);
         // se borra la ciudad y los caminos que llevan a ella
-        listacaminos.deleteCaminos(ciudad);
         listaciudad.eliminarciudad(numero);
+        listacaminos.deleteCaminos(ciudad);
+        
+        
+        
+        JOptionPane.showMessageDialog(this, "Ciudad eliminada con exito");
         
         
         Global.setListaciudades(listaciudad);
         Global.setListacaminos(listacaminos);
         
         
-        //listaciudad.print();
-        //listacaminos.print();
+        listaciudad.print();
+        listacaminos.print();
         
           
         }
         
       } catch(Exception e)
-      {//{OptionPane.showMessageDialog(this, "Error, ya se eliminaron todas las ciudades" +e);
+      {JOptionPane.showMessageDialog(this, "Error, ya se eliminaron todas las ciudades" +e);
       }    }//GEN-LAST:event_eliminarActionPerformed
 
     // se cierra la ventana y lleva al usuario al menu

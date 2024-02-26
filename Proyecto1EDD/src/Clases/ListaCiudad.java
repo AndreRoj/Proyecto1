@@ -42,7 +42,7 @@ public class ListaCiudad {
     }
     
     // eliminar el primer elemento de la lista
-    public Object deleteBegin(){
+    public void deleteBegin(){
         if (isEmpty()) {
             System.out.println("La lista esta vacia");
         } else {
@@ -50,9 +50,9 @@ public class ListaCiudad {
             setHead(pointer.getNext());
             pointer.setNext(null);
             size--;
-            return pointer.getElement();
+            
         }
-        return null;
+        
     }
     
     //elimina la ciudad, recibe el nombre de la ciudad.
@@ -105,10 +105,11 @@ public class ListaCiudad {
     // retorna el objeto ciudad segun su nombre.
     public Ciudad definirCiudad(int element){
         NodoCiudad pointer = getHead();
+        
         while(pointer.getElement().getName() != element){
             pointer = pointer.getNext();
         }
-         return pointer.getElement();
+        return pointer.getElement();
     }
  }
 

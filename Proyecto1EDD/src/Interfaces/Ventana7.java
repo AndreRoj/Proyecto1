@@ -10,6 +10,7 @@ import Clases.ListaCiudad;
 import Clases.NodoCiudad;
 import Funciones.Global;
 import Clases.ListaCaminos;
+import Clases.NodoCamino;
 import javax.swing.JOptionPane;
 
 
@@ -204,18 +205,44 @@ public class Ventana7 extends javax.swing.JFrame {
         Ciudad ciudad1F = listaciudad.definirCiudad(numero1F);
         Ciudad ciudad2F = listaciudad.definirCiudad(numero2F);
         // si la ciudad es la misma se le notifica al usuario que no es posible
+        
+        NodoCamino aux = listacaminos.getHead();
+        boolean x = false;
+        while (aux.getNext() != null){
+            if ((aux.getElement().getCiudadinicial().getName() == ciudad1F.getName()) && (aux.getElement().getCiudadfinal().getName() == ciudad2F.getName())){
+               x = true;
+            }else if((aux.getElement().getCiudadinicial().getName() == ciudad2F.getName()) && (aux.getElement().getCiudadfinal().getName() == ciudad1F.getName())){
+                x = true;
+            }
+            aux = aux.getNext();
+            
+        }
+        
+        
+
         if(ciudad1F.getName() == ciudad2F.getName()){
             JOptionPane.showMessageDialog(this, "No puedes conectar la misma ciudad!");
-        }else{
+            
+            
+        }else if  (x == true) {
+            JOptionPane.showMessageDialog(this, "Las ciudades ya estan conectadas");
+        }
+                else{
             // se crea el camino
-            int distancia = Integer.parseInt(this.distancia.getText());
-        
+            float distancia = Float.parseFloat(this.distancia.getText());
+            if (distancia <= 0 ){
+                JOptionPane.showMessageDialog(this, "debes ingresar una distancia valida");
+            } else{
+             
             Camino camino = new Camino(ciudad1F, ciudad2F, distancia);
 
             listacaminos.insertFinal(camino);
-            listacaminos.print();
+            //listacaminos.print();
 
-            Global.setListacaminos(listacaminos);
+            Global.setListacaminos(listacaminos); 
+            JOptionPane.showMessageDialog(this, "Camino creado con exito");
+            }
+        
         }
         
         

@@ -98,6 +98,7 @@ public void deleteCaminos(Ciudad ciudad){
         } else {
         NodoCamino aux = getHead();
         int eliminate = ciudad.getName();
+        try{
         while (aux!= null){
             if(aux.getElement().getCiudadinicial().getName() == eliminate){
                 if(aux==getHead()){
@@ -164,6 +165,9 @@ public void deleteCaminos(Ciudad ciudad){
             }
             aux = aux.getNext();
         }
+    }catch(Exception e){
+            deleteBegin();
+            }
     }
 }  
 

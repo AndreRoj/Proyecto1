@@ -211,6 +211,9 @@ public class Ventana4 extends javax.swing.JFrame {
             
             String d = distancia.getText();
             float distancia = Float.parseFloat(d);
+            if (distancia <= 0 ){
+                JOptionPane.showMessageDialog(this, "debes ingresar una distancia valida");
+            } else{
             //Se crea el objeto ciudad
             Ciudad ciudad = new Ciudad(Integer.parseInt(nuevaCiudad.getText()));
             
@@ -235,10 +238,10 @@ public class Ventana4 extends javax.swing.JFrame {
             //listaciudad.print();
             //listacaminos.print();
         
-            
+            JOptionPane.showMessageDialog(this, "Ciudad creada con exito");
             Global.setListaciudades(listaciudad);
             Global.setListacaminos(listacaminos);
-            
+            }    
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error al cargar los datos de tipo: " + e);
         }
